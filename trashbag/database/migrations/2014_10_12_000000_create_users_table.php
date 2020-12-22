@@ -18,9 +18,10 @@ class CreateUsersTable extends Migration
             $table->string('nama_lengkap');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('no_telepon');
-            $table->text('alamat');
-            $table->tinyInteger('role');
+            $table->string('no_telepon')->nullable();
+            $table->text('alamat')->nullable();
+            $table->string('foto_profil')->nullable();
+            $table->tinyInteger('role')->default(1);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

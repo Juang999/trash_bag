@@ -39,7 +39,7 @@ class UserController extends Controller
         }
 
         $user = User::create([
-            'name' => $request->get('name'),
+            'nama_lengkap' => $request->get('nama_lengkap'),
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
         ]);
@@ -47,6 +47,17 @@ class UserController extends Controller
         $token = JWTAuth::fromUser($user);
 
         return response()->json(compact('user','token'),201);
+    }
+
+    public function getFoto(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'foto_profil' => ['mimes: jpg, jpeg, png'],
+            'no_telepon' => 'required|string|min:6|confirmed',
+            'alamat' => 'required|string|min:6|confirmed',
+        ]);
+
+        
     }
 
     public function getAuthenticatedUser()

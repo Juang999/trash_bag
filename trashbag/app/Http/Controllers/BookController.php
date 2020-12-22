@@ -13,7 +13,7 @@ class BookController extends Controller
     }
 
     public function bookAuth() {
-        $data = "Welcome " . Auth::user()->name;
+        $data = "Welcome " . Auth::user()->nama_lengkap;
         return response()->json($data, 200);
     }
 }
