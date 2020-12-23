@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserControllerAPI extends Controller
 {
@@ -23,8 +25,9 @@ class UserControllerAPI extends Controller
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
-
-        return response()->json(compact('token'));
+        $role = Auth::user()->role;
+        // dd($user);
+        return response()->json(compact('token', 'role'));
     }
 
     public function register(Request $request)
