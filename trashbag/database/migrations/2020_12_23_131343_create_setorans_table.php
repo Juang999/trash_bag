@@ -15,6 +15,12 @@ class CreateSetoransTable extends Migration
     {
         Schema::create('setorans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('jenis_id')->constrained('jenissampah');
+            $table->foreignId('pj')->constrained('users');
+            $table->tinyInteger('keterangan');
+            $table->double('berat');
+            $table->integer('debit');
             $table->timestamps();
         });
     }
