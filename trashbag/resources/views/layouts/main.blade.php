@@ -16,8 +16,8 @@
     <!-- Fontfaces CSS-->
     <link href="{{ url('css/font-face.css')}}" rel="stylesheet" media="all">
     <link href="{{ url('css/all.css')}}" rel="stylesheet" media="all">
-    {{-- <link href="{{ url('vendor/font-awesome-4.7/css/font-awesome.min.css')}}" rel="stylesheet" media="all">
-    <link href="{{ url('vendor/font-awesome-5/css/fontawesome-all.min.css')}}" rel="stylesheet" media="all"> --}}
+    <link href="{{ url('vendor/font-awesome-4.7/css/font-awesome.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{ url('vendor/font-awesome-5/css/fontawesome-all.min.css')}}" rel="stylesheet" media="all">
     <link href="{{ url('vendor/mdi-font/css/material-design-iconic-font.min.css')}}" rel="stylesheet" media="all">
 
     <!-- Bootstrap CSS-->
@@ -50,12 +50,12 @@
             </div>
             <div class="menu-sidebar2__content js-scrollbar1">
                 <div class="account2">
-                    {{-- <a href="{{ url('user/profile') }}" style="text-decoration: none; cursor: pointer;"> --}}
-                        <div class="image img-cir img-120">
-                            <img src="{{ url('images/icon/avatar-big-01.jpg')}}" alt="John Doe" />
-                        </div>
-                        <h4 class="name">john doe</h4>
-                    {{-- </a> --}}
+                        <a href="{{ url('user/profile') }}" style="text-decoration: none; cursor: pointer; text-align:center;">
+                            <div class="image img-cir img-120">
+                                <img src="{{ Auth::user()->foto_profil }}" alt="John Doe" />
+                            </div>
+                            <h4 class="name">{{ Auth::user()->nama_lengkap }}</h4>
+                        </a>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
@@ -69,7 +69,7 @@
                             </a>
                         </li>
                         <li class="{{ ($menu == 'pengurus')?'active has-sub':'' }}">
-                            <a class="js-arrow" href="{{ url('/') }}">
+                            <a class="js-arrow" href="{{ url('/pengurus') }}">
                                 <i class="fas fa-user-tie"></i>Pengurus
                             </a>
                         </li>
@@ -141,11 +141,11 @@
                 </div>
                 <div class="menu-sidebar2__content js-scrollbar2">
                     <div class="account2">
-                        <a href="{{ url('user/profile') }}" style="text-decoration: none; cursor: pointer;">
+                        <a href="{{ url('user/profile') }}" style="text-decoration: none; cursor: pointer; text-align:center;">
                             <div class="image img-cir img-120">
-                                <img src="{{ url('images/icon/avatar-big-01.jpg')}}" alt="John Doe" />
+                                <img src="{{ Auth::user()->foto_profil }}" alt="John Doe" />
                             </div>
-                            <h4 class="name">john doe</h4>
+                            <h4 class="name">{{ Auth::user()->nama_lengkap }}</h4>
                         </a>
                         <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -160,7 +160,7 @@
                                 </a>
                             </li>
                             <li class="{{ ($menu == 'pengurus')?'active has-sub':'' }}">
-                                <a class="js-arrow" href="{{ url('/') }}">
+                                <a class="js-arrow" href="{{ url('/pengurus') }}">
                                     <i class="fas fa-user-tie"></i>Pengurus
                                 </a>
                             </li>

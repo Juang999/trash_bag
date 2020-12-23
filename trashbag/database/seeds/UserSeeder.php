@@ -17,6 +17,10 @@ class UserSeeder extends Seeder
             'nama_lengkap' => 'ilahaka',
             'email' => 'ahmadarifilahaka77@gmail.com',
             'password' => Hash::make('password'),
+            'no_telepon'=> '081234567890',
+            'alamat'=>'pondok programmer', 
+            'foto_profil' => 'https://via.placeholder.com/150',
+            'role'=> '5'
         ]);
     }
 }

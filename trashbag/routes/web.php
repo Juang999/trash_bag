@@ -21,7 +21,9 @@ Route::group(['middleware' => 'auth'], function () {
     
     Route::get('/', 'HomeController@index')->name('home');
 
-    Route::get('user/profile', 'web\UserController@profile');
+    Route::get('user/profile', 'UserController@profile');
+
+    Route::resource('pengurus', 'PengurusController');
 });
 
 
