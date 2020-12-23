@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use GuzzleHttp\Client;
 
-class UserController extends Controller
+class UserControllerAPI extends Controller
 {
     public function login(Request $request)
     {
@@ -64,6 +65,23 @@ class UserController extends Controller
             return $validator->errors();
         }
 
+        $client = new Client;
+
+        $file = base64_encode(file_get_contents($request->foto_profil));
+
+        $response = $client->request('POST', 'https://freeimage.host/api/1/upload', [
+            'form_params' => [
+                'key' => '6d207e02198a847aa98d0a2a901485a5',
+                'action' => 'upload',
+                'source' => $file,
+                'format' => 'json'
+            ]
+        ]);
+
+        $data = $response->getBody()->getContents();
+        $data = json_decode($data);
+        $gambar = $data->image->display_url;
+
         $User = User::find($id);
 
         if (!$User) {
@@ -72,8 +90,8 @@ class UserController extends Controller
 
         $User->nama_lengkap = $request->nama_lengkap;
         $User->email = $request->email;
-        $User->password = $request->password;
-        $User->foto_profil = $request->foto_profil;
+        $User->password = Hash::make($request->password);
+        $User->foto_profil = $gambar;
         $User->no_telepon = $request->no_telepon;
         $User->alamat = $request->alamat;
 

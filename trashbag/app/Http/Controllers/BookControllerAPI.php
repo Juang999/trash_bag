@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 
-class BookController extends Controller
+class BookControllerAPI extends Controller
 {
     public function book() {
         $data = "Data All Book";
