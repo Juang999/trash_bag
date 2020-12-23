@@ -49,15 +49,42 @@ class UserController extends Controller
         return response()->json(compact('user','token'),201);
     }
 
-    public function getFoto(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'foto_profil' => ['mimes: jpg, jpeg, png'],
-            'no_telepon' => 'required|string|min:6|confirmed',
-            'alamat' => 'required|string|min:6|confirmed',
+            'nama_lengkap' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'foto_profil' => 'mimes:jpg,jpeg,png',
+            'no_telepon' => 'required',
+            'alamat' => 'required',
         ]);
 
-        
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+
+        $User = User::find($id);
+
+        if (!$User) {
+            return $this->sendResponse('gagal', 'profil gagal diubah', NULL, 404);
+        }
+
+        $User->nama_lengkap = $request->nama_lengkap;
+        $User->email = $request->email;
+        $User->password = $request->password;
+        $User->foto_profil = $request->foto_profil;
+        $User->no_telepon = $request->no_telepon;
+        $User->alamat = $request->alamat;
+
+        try {
+            $User->save();
+            
+            $User = User::all();
+            return $this->sendResponse('berhasil', 'profil berhasil diubah', $User, 200);
+        } catch (\Throwable $th) {
+            return $this->sendResponse('gagal', 'profil gagal diubah', $th->getMessage(), 500);
+        }
     }
 
     public function getAuthenticatedUser()
