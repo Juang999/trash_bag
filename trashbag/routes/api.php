@@ -24,6 +24,6 @@ Route::get('book', 'BookControllerAPI@book');
 
 Route::get('bookall', 'BookControllerAPI@bookAuth')->middleware('jwt.verify');
 Route::get('user', 'UserControllerAPI@getAuthenticatedUser')->middleware('jwt.verify');
-Route::patch('user/{id}', 'UserControllerAPI@update');
+Route::patch('user/{id}', 'UserControllerAPI@update')->middleware('jwt.verify');
 
 Route::resource('resource', 'UserController');

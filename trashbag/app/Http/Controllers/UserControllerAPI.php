@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserControllerAPI extends Controller
 {
@@ -23,8 +25,9 @@ class UserControllerAPI extends Controller
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
-
-        return response()->json(compact('token'));
+        $role = Auth::user()->role;
+        // dd($user);
+        return response()->json(compact('token', 'role'));
     }
 
     public function register(Request $request)
@@ -65,28 +68,26 @@ class UserControllerAPI extends Controller
             return $validator->errors();
         }
 
-        $client = new Client;
-
-        $file = base64_encode(file_get_contents($request->foto_profil));
-
-        $response = $client->request('POST', 'https://freeimage.host/api/1/upload', [
-            'form_params' => [
-                'key' => '6d207e02198a847aa98d0a2a901485a5',
-                'action' => 'upload',
-                'source' => $file,
-                'format' => 'json'
-            ]
-        ]);
-
-        $data = $response->getBody()->getContents();
-        $data = json_decode($data);
-        $gambar = $data->image->display_url;
-
         $User = User::find($id);
 
         if (!$User) {
             return $this->sendResponse('gagal', 'profil gagal diubah', NULL, 404);
         }
+
+        $client = new Client;
+
+        $file = base64_encode(file_get_contents($request->foto_profil));
+            $response = $client->request('POST', 'https://freeimage.host/api/1/upload',[
+                'form_params' => [
+                    'key' => '6d207e02198a847aa98d0a2a901485a5',
+                    'action' => 'upload',
+                    'source' => $file,
+                    'format' => 'json'
+                ]
+            ]);
+            $data = $response->getBody()->getContents();
+            $data = json_decode($data);
+            $gambar = $data->image->display_url;
 
         $User->nama_lengkap = $request->nama_lengkap;
         $User->email = $request->email;
@@ -98,7 +99,7 @@ class UserControllerAPI extends Controller
         try {
             $User->save();
             
-            $User = User::all();
+            $User = User::all()->where('id', $id);
             return $this->sendResponse('berhasil', 'profil berhasil diubah', $User, 200);
         } catch (\Throwable $th) {
             return $this->sendResponse('gagal', 'profil gagal diubah', $th->getMessage(), 500);
