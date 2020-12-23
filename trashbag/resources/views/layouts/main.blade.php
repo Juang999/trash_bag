@@ -50,13 +50,16 @@
             </div>
             <div class="menu-sidebar2__content js-scrollbar1">
                 <div class="account2">
-                    <a href="{{ url('user/profile') }}" style="text-decoration: none; cursor: pointer;">
+                    {{-- <a href="{{ url('user/profile') }}" style="text-decoration: none; cursor: pointer;"> --}}
                         <div class="image img-cir img-120">
                             <img src="{{ url('images/icon/avatar-big-01.jpg')}}" alt="John Doe" />
                         </div>
                         <h4 class="name">john doe</h4>
-                    </a>
-                    <a href="">Logout</a>
+                    {{-- </a> --}}
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                    </form>
                 </div>
                 <nav class="navbar-sidebar2">
                     <ul class="list-unstyled navbar__list">
@@ -119,8 +122,10 @@
                                                 <i class="zmdi zmdi-account"></i>Account</a>
                                         </div>
                                         <div class="account-dropdown__item">
-                                            <a href="">
-                                                <i class="fas fa-sign-out-alt"></i>Logout</a>
+                                            <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                            </form>
                                         </div>
                                 </div>
                             </div>
@@ -142,7 +147,10 @@
                             </div>
                             <h4 class="name">john doe</h4>
                         </a>
-                        <a href="">Sign out</a>
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                        </form>
                     </div>
                     <nav class="navbar-sidebar2">
                         <ul class="list-unstyled navbar__list">
