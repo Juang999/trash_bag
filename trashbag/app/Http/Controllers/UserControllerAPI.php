@@ -65,28 +65,26 @@ class UserControllerAPI extends Controller
             return $validator->errors();
         }
 
-        $client = new Client;
-
-        $file = base64_encode(file_get_contents($request->foto_profil));
-
-        $response = $client->request('POST', 'https://freeimage.host/api/1/upload', [
-            'form_params' => [
-                'key' => '6d207e02198a847aa98d0a2a901485a5',
-                'action' => 'upload',
-                'source' => $file,
-                'format' => 'json'
-            ]
-        ]);
-
-        $data = $response->getBody()->getContents();
-        $data = json_decode($data);
-        $gambar = $data->image->display_url;
-
         $User = User::find($id);
 
         if (!$User) {
             return $this->sendResponse('gagal', 'profil gagal diubah', NULL, 404);
         }
+
+        $client = new Client;
+
+        $file = base64_encode(file_get_contents($request->foto_profil));
+            $response = $client->request('POST', 'https://freeimage.host/api/1/upload',[
+                'form_params' => [
+                    'key' => '6d207e02198a847aa98d0a2a901485a5',
+                    'action' => 'upload',
+                    'source' => $file,
+                    'format' => 'json'
+                ]
+            ]);
+            $data = $response->getBody()->getContents();
+            $data = json_decode($data);
+            $gambar = $data->image->display_url;
 
         $User->nama_lengkap = $request->nama_lengkap;
         $User->email = $request->email;
