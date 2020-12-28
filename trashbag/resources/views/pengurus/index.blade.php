@@ -30,7 +30,11 @@
     </div>
 </section>
 <!-- END BREADCRUMB-->
-
+@if(session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
 <!-- STATISTIC-->
 <section class="statistic">
     <div class="section__content section__content--p30">
@@ -63,26 +67,31 @@
                                         <td colspan="6" style="text-align: center">Belum ada data</td>
                                     </tr>
                                 @else
-                                    @foreach ($pengurus as $item)
+                                    @foreach ($pengurus as $key => $item)
                                     <tr class="tr-shadow">
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $pengurus->firstItem()+$key }}</td>
                                         <td>
-                                            <img src="{{ $item->foto_profil }}" alt="">
+                                            <img class="mx-auto d-block image img-cir img-120" src="{{ $item->foto_profil }}" alt="">
                                         </td>
                                         <td>{{ $item->nama_lengkap }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->no_telepon }}</td>
                                         <td>
                                             <div class="table-data-feature">
-                                                <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
+                                                <a href="{{ url('pengurus/'.$item->id) }}" class="item" data-toggle="tooltip" data-placement="top" title="Detail">
                                                     <i class="zmdi zmdi-info"></i>
-                                                </button>
-                                                <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                </a>
+                                                <a href="{{ url('pengurus/'.$item->id.'/edit') }}" class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="zmdi zmdi-edit"></i>
-                                                </button>
-                                                <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                    <i class="zmdi zmdi-delete"></i>
-                                                </button>
+                                                </a>
+                                                <form action="{{ url('pengurus/'.$item->id) }}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    
+                                                    <button type="submit" class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                        <i class="zmdi zmdi-delete"></i>
+                                                    </button>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>
@@ -93,19 +102,9 @@
                         </table>
                     </div>
                     <!-- END DATA TABLE -->
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-center">
-                          <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                          </li>
-                          <li class="page-item"><a class="page-link" href="#">1</a></li>
-                          <li class="page-item"><a class="page-link" href="#">2</a></li>
-                          <li class="page-item"><a class="page-link" href="#">3</a></li>
-                          <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                          </li>
-                        </ul>
-                      </nav>
+
+                    {{ $pengurus->links('vendor.pagination.default') }}
+
                 </div>
             </div>
         </div>

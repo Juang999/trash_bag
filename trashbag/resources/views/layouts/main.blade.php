@@ -155,32 +155,32 @@
                     <nav class="navbar-sidebar2">
                         <ul class="list-unstyled navbar__list">
                             <li class="{{ ($menu == 'home')?'active has-sub':'' }}">
-                                <a class="js-arrow" href="{{ url('/') }}">
+                                <a href="{{ url('/') }}">
                                     <i class="fas fa-tachometer-alt"></i>Dashboard
                                 </a>
                             </li>
                             <li class="{{ ($menu == 'pengurus')?'active has-sub':'' }}">
-                                <a class="js-arrow" href="{{ url('/pengurus') }}">
+                                <a href="{{ url('/pengurus') }}">
                                     <i class="fas fa-user-tie"></i>Pengurus
                                 </a>
                             </li>
                             <li class="{{ ($menu == 'nasabah')?'active has-sub':'' }}">
-                                <a class="js-arrow" href="{{ url('/') }}">
+                                <a href="{{ url('/') }}">
                                     <i class="fas fa-users"></i>Nasabah
                                 </a>
                             </li>
                             <li class="{{ ($menu == 'setoran')?'active has-sub':'' }}">
-                                <a class="js-arrow" href="{{ url('/') }}">
+                                <a href="{{ url('/') }}">
                                     <i class="fas fa-leaf"></i>Setoran
                                 </a>
                             </li>
                             <li class="{{ ($menu == 'penjualan')?'active has-sub':'' }}">
-                                <a class="js-arrow" href="{{ url('/') }}">
+                                <a href="{{ url('/') }}">
                                     <i class="fas fa-hand-holding-usd"></i>Penjualan
                                 </a>
                             </li>
                             <li class="{{ ($menu == 'keuangan')?'active has-sub':'' }}">
-                                <a class="js-arrow" href="{{ url('/') }}">
+                                <a href="{{ url('/') }}">
                                     <i class="fas fa-dollar-sign"></i>Keuangan Bank
                                 </a>
                             </li>
