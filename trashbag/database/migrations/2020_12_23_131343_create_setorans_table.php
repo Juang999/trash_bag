@@ -20,7 +20,7 @@ class CreateSetoransTable extends Migration
             $table->foreignId('pj')->constrained('users');
             $table->tinyInteger('keterangan');
             $table->double('berat');
-            $table->integer('debit');
+            $table->integer('debit', 250);
             $table->timestamps();
         });
     }

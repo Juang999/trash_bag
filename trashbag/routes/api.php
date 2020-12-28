@@ -18,12 +18,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Login & Register
 Route::post('register', 'UserControllerAPI@register');
 Route::post('login', 'UserControllerAPI@login');
 Route::get('book', 'BookControllerAPI@book');
-
 Route::get('bookall', 'BookControllerAPI@bookAuth')->middleware('jwt.verify');
 Route::get('user', 'UserControllerAPI@getAuthenticatedUser')->middleware('jwt.verify');
 Route::patch('user/{id}', 'UserControllerAPI@update')->middleware('jwt.verify');
 
-Route::resource('resource', 'UserController');
+//Antar & Jemput Sampah
+Route::post('store/{id}', 'SetoranController@store')->middleware('jwt.verify');
+
+//Resource
+Route::resource('resource', 'UserController')->middleware('jwt.verify');

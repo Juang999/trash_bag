@@ -26,8 +26,9 @@ class UserControllerAPI extends Controller
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
         $role = Auth::user()->role;
+        $nama_lengkap = Auth::user()->nama_lengkap;
         // dd($user);
-        return response()->json(compact('token', 'role'));
+        return response()->json(compact('token', 'role', 'nama_lengkap'));
     }
 
     public function register(Request $request)
