@@ -22,6 +22,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@index')->name('home');
 
     Route::get('user/profile', 'UserController@profile');
+    Route::get('user/{id}', 'UserController@getUbah');
+    Route::put('user/editFoto/{id}', 'UserController@editFoto');
+    Route::put('user/resetPass/{id}', 'UserController@resetPassword');
+    Route::resource('user', 'UserController');
 
     Route::resource('pengurus', 'PengurusController');
 });

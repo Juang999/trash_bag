@@ -238,6 +238,8 @@
     <!-- Main JS-->
     <script src="{{ url('js/main.js')}}"></script>
 
+    @yield('script')
+
 </body>
 
 </html>
