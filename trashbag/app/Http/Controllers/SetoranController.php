@@ -43,4 +43,19 @@ class SetoranController extends Controller
             return $this->sendResponse('gagal', 'setoran gagal diinput', $th->getMessage(), 500);
         }
     }
+
+    public function jemput(Request $request, Setoran $setoran, $id)
+    {
+        $setoran->user_id = $id;
+        $setoran->jenis_id = $request->jenis_sampah;           
+
+        try {
+            $setoran->save();
+
+            $jemput = Setoran::where('user_id', $setoran->user_id)->with('user', 'jenis')->latest()->first();
+            return $this->sendResponse('berhasil', 'data penjemputan berhasil diambil', $jemput, 200);
+        } catch (\Throwable $th) {
+            return $this->sendResponse('gagal', 'data gagal diambil', $th->getMessage(), 404);
+        }
+    }
 }

@@ -22,6 +22,14 @@ class UserSeeder extends Seeder
             'foto_profil' => 'https://via.placeholder.com/150',
             'role'=> '1'
             ],[
+            'nama_lengkap' => 'Hariri Pratama',
+            'email' => 'Hariri123@gmail.com',
+            'password' => Hash::make('Hariri1123'),
+            'no_telepon'=> '087871504747',
+            'alamat'=>'pondok programmer', 
+            'foto_profil' => 'https://via.placeholder.com/150',
+            'role'=> '1'
+            ],[
             'nama_lengkap' => 'Ahmad Dani',
             'email' => 'AhmadDani123@gmail.com',
             'password' => Hash::make('Ahmad123'),
