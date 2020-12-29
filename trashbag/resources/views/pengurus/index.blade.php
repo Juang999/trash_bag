@@ -43,14 +43,35 @@
                 <div class="col-md-12">
                     <!-- DATA TABLE -->
                     <h3 class="title-5 m-b-35">Data Pengurus</h3>
-                    <div class="table-data__tool d-flex flex-row-reverse">
+                    <div class="table-data__tool">
+                        <div class="table-data__tool-left">
+                            <div class="rs-select2--light rs-select2--md">
+                                <select class="js-select2" name="property" id="select1" onchange="tableFilter()">
+                                    <option value="">Pilih level user</option>
+                                    <option value="Pengurus 1">Pengurus 1</option>
+                                    <option value="Pengurus 2">Pengurus 2</option>
+                                    <option value="Bendahara">Bendahara</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                            <div class="rs-select2--light rs-select2--sm">
+                                <select class="js-select2" name="time">
+                                    <option selected="selected">Today</option>
+                                    <option value="">3 Days</option>
+                                    <option value="">1 Week</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                            <button class="au-btn-filter">
+                                <i class="zmdi zmdi-filter-list"></i>filters</button>
+                        </div>
                         <div class="table-data__tool-right">
                             <a href="{{ url('pengurus/create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small">
                                 <i class="zmdi zmdi-plus"></i>add user</a>
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-data2">
-                        <table class="table table-data2">
+                        <table class="table table-data2" id="tabelPengurus">
                             <thead>
                                 <tr>
                                     <th>No.</th>
@@ -58,6 +79,7 @@
                                     <th>Nama Lengkap</th>
                                     <th>Email</th>
                                     <th>No. Telepon</th>
+                                    <th>Lev. User</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -76,6 +98,15 @@
                                         <td>{{ $item->nama_lengkap }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->no_telepon }}</td>
+                                        <td>
+                                            @if ($item->role == 2)
+                                                Pengurus 1 (Setoran)
+                                            @elseif ($item->role == 3)
+                                                Pengurus 2 (Penjualan)
+                                            @else 
+                                                Bendahara
+                                            @endif
+                                        </td>
                                         <td>
                                             <div class="table-data-feature">
                                                 <a href="{{ url('pengurus/'.$item->id) }}" class="item" data-toggle="tooltip" data-placement="top" title="Detail">
@@ -112,4 +143,27 @@
 </section>
 <!-- END STATISTIC-->
 
+@endsection
+
+@section('script')
+    <script>
+
+        function tableFilter(){
+            var input, filter, table, tr, td, i;
+            input  = document.getElementById('select1');
+            filter = input.value.toUpperCase();
+            table = document.getElementById('tabelPengurus');
+            tr = table.getElementsByTagName('tr');
+            for(i = 0; i< tr.length; i++){
+                td = tr[i].getElementsByTagName('td')[5];
+                if(td){
+                    if(td.innerHTML.toUpperCase().indexOf(filter) > -1){
+                        tr[i].style.display = "";
+                    }else{
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
 @endsection
