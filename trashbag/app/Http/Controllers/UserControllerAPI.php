@@ -27,8 +27,9 @@ class UserControllerAPI extends Controller
         }
         $role = Auth::user()->role;
         $nama_lengkap = Auth::user()->nama_lengkap;
+        $email = Auth::user()->email;
         // dd($user);
-        return response()->json(compact('token', 'role', 'nama_lengkap'));
+        return response()->json(compact('token', 'role', 'nama_lengkap', 'email'));
     }
 
     public function register(Request $request)
@@ -59,7 +60,6 @@ class UserControllerAPI extends Controller
         $validator = Validator::make($request->all(), [
             'nama_lengkap' => 'required',
             'email' => 'required',
-            'password' => 'required',
             'foto_profil' => 'mimes:jpg,jpeg,png',
             'no_telepon' => 'required',
             'alamat' => 'required',
@@ -92,7 +92,6 @@ class UserControllerAPI extends Controller
 
         $User->nama_lengkap = $request->nama_lengkap;
         $User->email = $request->email;
-        $User->password = Hash::make($request->password);
         $User->foto_profil = $gambar;
         $User->no_telepon = $request->no_telepon;
         $User->alamat = $request->alamat;

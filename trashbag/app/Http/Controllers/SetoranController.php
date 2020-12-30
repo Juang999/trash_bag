@@ -23,8 +23,8 @@ class SetoranController extends Controller
         }
         
         $harga = JenisSampah::select('harga')->where('id', $request->jenis_sampah)->first();
-        
-        $debit = $request->berat . $harga;
+
+        $debit = $request->berat * $harga->harga;
 
         $setoran->user_id = $request->id;
         $setoran->jenis_id = $request->jenis_sampah;
@@ -33,13 +33,29 @@ class SetoranController extends Controller
         $setoran->berat = $request->berat;
         $setoran->debit = $debit;
 
+
         try {
             $setoran->save();
 
-            $setoran = Setoran::all()->where('pj', $id);
+            $setoran = Setoran::where('id', $setoran->id)->with('user', 'jenis')->first();
             return $this->sendResponse('berhasil', 'setoran berhasil diinput', $setoran, 200);
         } catch (\Throwable $th) {
             return $this->sendResponse('gagal', 'setoran gagal diinput', $th->getMessage(), 500);
+        }
+    }
+
+    public function jemput(Request $request, Setoran $setoran, $id)
+    {
+        $setoran->user_id = $id;
+        $setoran->jenis_id = $request->jenis_sampah;           
+
+        try {
+            $setoran->save();
+
+            $jemput = Setoran::where('user_id', $setoran->user_id)->with('user', 'jenis')->latest()->first();
+            return $this->sendResponse('berhasil', 'data penjemputan berhasil diambil', $jemput, 200);
+        } catch (\Throwable $th) {
+            return $this->sendResponse('gagal', 'data gagal diambil', $th->getMessage(), 404);
         }
     }
 }

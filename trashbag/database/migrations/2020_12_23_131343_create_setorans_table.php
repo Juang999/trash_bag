@@ -17,10 +17,10 @@ class CreateSetoransTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('jenis_id')->constrained('jenissampah');
-            $table->foreignId('pj')->constrained('users');
-            $table->tinyInteger('keterangan');
-            $table->double('berat');
-            $table->integer('debit', 250);
+            $table->foreignId('pj')->nullable()->constrained('users');
+            $table->tinyInteger('keterangan')->default(1);
+            $table->double('berat')->nullable();
+            $table->integer('debit')->nullable();
             $table->timestamps();
         });
     }
