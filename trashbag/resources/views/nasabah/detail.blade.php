@@ -20,11 +20,7 @@
                                 <li class="list-inline-item seprate">
                                     <span>/</span>
                                 </li>
-                                <li class="list-inline-item">Pengurus</li>
-                                <li class="list-inline-item seprate">
-                                    <span>/</span>
-                                </li>
-                                <li class="list-inline-item">Detail Data Pengurus</li>
+                                <li class="list-inline-item">Profile</li>
                             </ul>
                         </div>
                     </div>
@@ -45,10 +41,10 @@
 <section class="statistic">
     <div class="section__content section__content--p30">
         <div class="container-fluid">
-            <h3 class="title-5">Detail data pengurus</h3>
+            <h3 class="title-5">Detail data nasabah</h3>
             <div class="table-data__tool">
                 <div class="table-data__tool-right">
-                    <a href="{{ url('pengurus') }}" class="au-btn au-btn-icon au-btn--green au-btn--small">
+                    <a href="{{ url('nasabah') }}" class="au-btn au-btn-icon au-btn--green au-btn--small">
                         <i class="fas fa-arrow-left"></i>Kembali</a>
                 </div>
             </div>
@@ -61,10 +57,10 @@
                         </div>
                         <div class="card-body">
                             <div class="mx-auto d-block">
-                                <img class="mx-auto d-block image img-cir img-120" src="{{ $pengurus->foto_profil }}" alt="Card image cap">
-                                <h4 class="text-sm-center mt-2 mb-1">{{ $pengurus->nama_lengkap }}</h4>
+                                <img class="mx-auto d-block image img-cir img-120" src="{{ $nasabah->foto_profil }}" alt="Card image cap">
+                                <h4 class="text-sm-center mt-2 mb-1">{{ $nasabah->nama_lengkap }}</h4>
                                 <div class="location text-sm-center">
-                                    {{ $pengurus->email }}</div>
+                                   {{ $nasabah->email }}</div>
                             </div>
                             <hr>
                         </div>
@@ -77,30 +73,25 @@
                                 <tbody>
                                     <tr>
                                         <td class="col-2">Nama</td>
-                                        <td class="col">{{ $pengurus->nama_lengkap }}</td>
+                                        <td class="col">{{ $nasabah->nama_lengkap }}</td>
                                     </tr>
                                     <tr>
                                         <td class="col-2">Email</td>
-                                        <td class="col">{{ $pengurus->email }}</td>
+                                        <td class="col">{{ $nasabah->email }}</td>
                                     </tr>
                                     <tr>
                                         <td class="col-2">No. Telepon</td>
-                                        <td class="col">{{ $pengurus->no_telepon }}</td>
+                                        <td class="col">{{ $nasabah->no_telepon }}</td>
                                     </tr>
                                     <tr>
                                         <td class="col-2">Alamat</td>
-                                        <td class="col">{{ $pengurus->alamat }}</td>
+                                        <td class="col">{{ $nasabah->alamat }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="col-2">Level User</td>
-                                        @if ($pengurus->role == '2')
-                                            <td class="col">Pengurus 1</td>
-                                        @elseif ($pengurus->role == '3')
-                                            <td class="col">Pengurus 2</td>
-                                        @elseif ($pengurus->role == '4')
-                                            <td class="col">Bendahara</td>
-                                        @endif
-                                        
+                                        <td class="col-2"></td>
+                                        <td class="col">
+                                            <a href="" class="btn btn-outline-primary">Buku Tabungan</a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

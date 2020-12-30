@@ -8,22 +8,20 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use GuzzleHttp\Client;
 
-class PengurusController extends Controller
+class NasabahController extends Controller
 {
     public function index(){
-        $pengurus = User::where('role', '!=', 1)->Where('role', '!=', 5)->get();
-        // dd($pengurus);
-        return view('pengurus.index', ['menu'=> 'pengurus', 'pengurus'=>$pengurus]);
+        $nasabah = User::where('role', 1)->get();
+        return view('nasabah.index', ['menu'=>'nasabah', 'nasabah'=>$nasabah]);
     }
 
     public function show($id){
-        $pengurus = User::find($id);
-        return view('pengurus.detail', ['menu' => 'pengurus', 'pengurus'=>$pengurus]);
+        $nasabah = User::find($id);
+        return view('nasabah.detail', ['menu'=>'nasabah', 'nasabah'=>$nasabah]);
     }
 
     public function create(){
-        return view('pengurus.create', ['menu'=> 'pengurus']);
-
+        return view('nasabah.create', ['menu'=>'nasabah']);
     }
 
     public function store(Request $request){
@@ -36,7 +34,6 @@ class PengurusController extends Controller
             'email' => 'required|email',
             'password' => 'required|confirmed|min:8',
             'alamat' => 'required',
-            'level' => 'requried',
             'foto_profil' => 'required|image'
             
         ])->validate();
@@ -52,16 +49,16 @@ class PengurusController extends Controller
             'no_telepon' => $request->no_telepon,
             'alamat' => $request->alamat,
             'foto_profil' => $gambar,
-            'role' => $request->role
+            'role' => 1
         ]);
 
-        return redirect('/pengurus')->with('status', 'Data berhasil ditambahkan');
+        return redirect('/nasabah')->with('status', 'Data berhasil ditambahkan');
         
     }
 
     public function edit($id){
-        $pengurus = User::find($id);
-        return view('pengurus.edit', ['menu'=> 'pengurus', 'pengurus'=>$pengurus]);
+        $nasabah = User::find($id);
+        return view('nasabah.edit', ['menu'=>'nasabah', 'nasabah'=>$nasabah]);
     }
 
     public function update(Request $request, $id){
@@ -73,19 +70,18 @@ class PengurusController extends Controller
                 'email' => 'required|email',
                 'password' => 'confirmed|min:8',
                 'alamat' => 'required',
-                'level' => 'requried',
                 'foto_profil' => 'image'
             ])->validate();
         }else{
             Validator::make($request->all(),[
                 'nama' => 'required|string',
                 'no_telepon' => 'required|digits_between:10,13',
-                'email' => 'required|email',
+                'email' => 'required|email',    
                 'alamat' => 'required',
-                'level' => 'requried',
                 'foto_profil' => 'image'
-            ])->validate();
+            ])->validate(); 
         }
+
         $data = User::find($id);
         $gambar = $data->foto_profil;
         $password = $data->password;
@@ -104,17 +100,10 @@ class PengurusController extends Controller
             'no_telepon' => $request->no_telepon,
             'alamat' => $request->alamat,
             'foto_profil' => $gambar,
-            'role' => $request->role
         ]);
 
-        return redirect('pengurus')->with('status', 'Data berhasil diubah');
+        return redirect('nasabah')->with('status', 'Data berhasil diubah');
 
-    }
-
-    public function destroy($id){
-        User::destroy($id);
-
-        return redirect('pengurus')->with('status', 'Data berhasil dihapus');
     }
 
     public function imageUpload($data){
@@ -132,8 +121,13 @@ class PengurusController extends Controller
         ]);
         $data = $response->getBody()->getContents();
         $data = json_decode($data);
-
         return $data->image->display_url;
+
+    }
+
+    public function destroy($id){
+        User::destroy($id);
+        return redirect('nasabah')->with('status', 'Data berhasil dihapus');
     }
 
 }

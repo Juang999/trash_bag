@@ -74,7 +74,7 @@
                             </a>
                         </li>
                         <li class="{{ ($menu == 'nasabah')?'active has-sub':'' }}">
-                            <a class="js-arrow" href="{{ url('/') }}">
+                            <a class="js-arrow" href="{{ url('/nasabah') }}">
                                 <i class="fas fa-users"></i>Nasabah
                             </a>
                         </li>
@@ -165,7 +165,7 @@
                                 </a>
                             </li>
                             <li class="{{ ($menu == 'nasabah')?'active has-sub':'' }}">
-                                <a href="{{ url('/') }}">
+                                <a href="{{ url('/nasabah') }}">
                                     <i class="fas fa-users"></i>Nasabah
                                 </a>
                             </li>

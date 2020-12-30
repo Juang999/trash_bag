@@ -20,11 +20,11 @@
                                 <li class="list-inline-item seprate">
                                     <span>/</span>
                                 </li>
-                                <li class="list-inline-item">Pengurus</li>
+                                <li class="list-inline-item">Nasabah</li>
                                 <li class="list-inline-item seprate">
                                     <span>/</span>
                                 </li>
-                                <li class="list-inline-item">Tambah Data Pengurus</li>
+                                <li class="list-inline-item">Tambah Data Nasabah</li>
                             </ul>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
 <section class="statistic">
     <div class="section__content section__content--p30">
         <div class="container-fluid">
-            <form action="{{ url('pengurus') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ url('nasabah') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-4">
@@ -146,24 +146,6 @@
                                         <div class="col-12 col-md-9">
                                             <textarea name="alamat" id="alamat" rows="9" class="form-control @error('alamat') is-invalid @enderror"></textarea>
                                             @error('alamat')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3">
-                                            <label for="role" class=" form-control-label">Level User</label>
-                                        </div>
-                                        <div class="col-12 col-md-9">
-                                            <select name="role" id="role" class="form-control @error('role') is-invalid @enderror">
-                                                <option value="">Please select</option>
-                                                <option value="2">Pengurus 1</option>
-                                                <option value="3">Pengurus 2</option>
-                                                <option value="4">Bendahara</option>
-                                            </select>
-                                            @error('role')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>

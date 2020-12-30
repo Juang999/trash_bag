@@ -20,11 +20,11 @@
                                 <li class="list-inline-item seprate">
                                     <span>/</span>
                                 </li>
-                                <li class="list-inline-item">Pengurus</li>
+                                <li class="list-inline-item">Nasabah</li>
                                 <li class="list-inline-item seprate">
                                     <span>/</span>
                                 </li>
-                                <li class="list-inline-item">Tambah Data Pengurus</li>
+                                <li class="list-inline-item">Edit Data Nasabah</li>
                             </ul>
                         </div>
                     </div>
@@ -45,7 +45,8 @@
 <section class="statistic">
     <div class="section__content section__content--p30">
         <div class="container-fluid">
-            <form action="{{ url('pengurus') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ url('nasabah/'.$nasabah->id) }}" method="post" enctype="multipart/form-data">
+                @method('put')
                 @csrf
                 <div class="row">
                     <div class="col-md-4">
@@ -56,7 +57,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="mx-auto d-block">
-                                    <img class="mx-auto d-block image img-cir img-120" src="{{ asset('images/no_image.png') }}" alt="Card image cap" id="display">
+                                    <img class="mx-auto d-block image img-cir img-120" src="{{ $nasabah->foto_profil }}" alt="Card image cap" id="display">
                                 </div>
                                 <hr>
                                 <div class="card-text text-sm-center">
@@ -79,7 +80,7 @@
                                             <label for="nama" class=" form-control-label">Nama Lengkap</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="text" id="nama" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}">
+                                            <input type="text" id="nama" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ (old('nama'))?old('nama'):$nasabah->nama_lengkap }}">
                                             @error('nama')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -92,7 +93,7 @@
                                             <label for="no_telepon" class=" form-control-label">No. Telepon</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="text" id="no_telepon" name="no_telepon" class="form-control @error('no_telepon') is-invalid @enderror" value="{{ old('no_telepon') }}">
+                                            <input type="text" id="no_telepon" name="no_telepon" class="form-control @error('no_telepon') is-invalid @enderror" value="{{ (old('no_telepon'))?old('no_telepon'):$nasabah->no_telepon }}">
                                             @error('no_telepon')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -105,34 +106,8 @@
                                             <label for="email" class=" form-control-label">Email</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
+                                            <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ (old('email'))?old('email'):$nasabah->email }}">
                                             @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3">
-                                            <label for="password" class=" form-control-label">Password</label>
-                                        </div>
-                                        <div class="col-12 col-md-9">
-                                            <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror">
-                                            @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3">
-                                            <label for="password" class=" form-control-label">Confirmasi Password</label>
-                                        </div>
-                                        <div class="col-12 col-md-9">
-                                            <input type="password" id="password_confirmation" name="password_confirmation" class="form-control @error('password') is-invalid @enderror">
-                                            @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -144,8 +119,25 @@
                                             <label for="alamat" class=" form-control-label">Alamat</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <textarea name="alamat" id="alamat" rows="9" class="form-control @error('alamat') is-invalid @enderror"></textarea>
+                                            <textarea name="alamat" id="alamat" rows="9" class="form-control @error('alamat') is-invalid @enderror">{{ (old('alamat')?old('alamat'):$nasabah->alamat) }}</textarea>
                                             @error('alamat')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <strong class="card-title pt-5 pb-2">Ubah Password</strong>
+                                    <small id="passHelp" class="form-text text-muted">Silahkan isi field input jika ingin mengubah password</small>
+                                    <div class="row form-group pt-3">
+                                        <div class="col col-md-3">
+                                            <label for="password" class=" form-control-label">Password</label>
+                                        </div>
+                                        <div class="col-12 col-md-9">
+                                            <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" aria-describedby="passHelp">
+                                            <small id="passHelp" class="form-text text-muted"></small>
+                                            @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -154,30 +146,21 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3">
-                                            <label for="role" class=" form-control-label">Level User</label>
+                                            <label for="password_confirmation" class=" form-control-label">Confirmasi Password</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <select name="role" id="role" class="form-control @error('role') is-invalid @enderror">
-                                                <option value="">Please select</option>
-                                                <option value="2">Pengurus 1</option>
-                                                <option value="3">Pengurus 2</option>
-                                                <option value="4">Bendahara</option>
-                                            </select>
-                                            @error('role')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                            <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
                                         </div>
                                     </div>
-                            </div>
+                                </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary btn-sm">
+                                <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-dot-circle-o"></i> Simpan
                                 </button>
-                                <button type="reset" class="btn btn-danger btn-sm">
-                                    <i class="fa fa-ban"></i> Reset
-                                </button>
+                                <a href="{{ url('nasabah') }}" class="btn btn-danger">
+                                    <i class="fa fa-ban"></i> Cencel
+                                </a>
+                                
                             </div>
                         </div>
                     </div>
