@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class SetoranController extends Controller
 {
-    public function store(Setoran $setoran, Request $request, $id)
+    public function store(Setoran $setoran, Request $request)
     {
         $validator = Validator::make($request->all(), [
             'id' => 'required',
@@ -25,6 +25,8 @@ class SetoranController extends Controller
         $harga = JenisSampah::select('harga')->where('id', $request->jenis_sampah)->first();
 
         $debit = $request->berat * $harga->harga;
+
+        $id = Auth::user()->id;
 
         $setoran->user_id = $request->id;
         $setoran->jenis_id = $request->jenis_sampah;
