@@ -106,24 +106,6 @@ class NasabahController extends Controller
 
     }
 
-    public function imageUpload($data){
-
-        $client = new Client();
-
-        $file = base64_encode(file_get_contents($data));
-        $response = $client->request('POST', 'https://freeimage.host/api/1/upload',[
-            'form_params' => [
-                'key' => '6d207e02198a847aa98d0a2a901485a5',
-                'action' => 'upload',
-                'source' => $file,
-                'format' => 'json'
-            ]
-        ]);
-        $data = $response->getBody()->getContents();
-        $data = json_decode($data);
-        return $data->image->display_url;
-
-    }
 
     public function destroy($id){
         User::destroy($id);

@@ -30,6 +30,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('pengurus', 'PengurusController');
 
     Route::resource('nasabah', 'NasabahController');
+
+    Route::get('jenis/getEdit/{id}', 'JenisSampahController@getEdit');
+    Route::resource('jenis', 'JenisSampahController');
 });
 
 
