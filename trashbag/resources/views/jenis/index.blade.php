@@ -87,14 +87,9 @@
                                                         <i class="zmdi zmdi-edit"></i>
                                                     </span>
                                                 </button>
-                                                <button class="item btnDelete" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                <a href="{{ url('jenis/delete/'.$item->id) }}" class="item" data-toggle="tooltip" data-placement="top" title="Delete" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
                                                     <i class="zmdi zmdi-delete"></i>
-                                                </button>
-                                                <form class="form-delete" action="{{ url('jenis/'.$item->id) }}" method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    
-                                                </form>
+                                                </a>
                                             </div>
                                         </td>
                                     </tr>
@@ -231,14 +226,6 @@
                         $('#formEdit #harga').val(data.harga);
                     }
                 });
-        });
-
-        $('.btnDelete').on('click', function(){
-            const condition = confirm('Apakah anda yakin ingin menghapus data ini?');
-            if(condition == true){
-                event.preventDefault();
-                $('.form-delete').submit();
-            }
         });
     </script>
 @endsection

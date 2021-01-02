@@ -45,6 +45,14 @@ class UserSeeder extends Seeder
             'alamat'=>'pondok programmer', 
             'foto_profil' => 'https://via.placeholder.com/150',
             'role'=> '3'
+            ],[
+            'nama_lengkap' => 'Super Admin',
+            'email' => 'superadmin@email.com',
+            'password' => Hash::make('password'),
+            'no_telepon'=> '0874788587667',
+            'alamat'=>'pondok programmer', 
+            'foto_profil' => 'https://via.placeholder.com/150',
+            'role'=> '5'
             ]
         ]);
     }

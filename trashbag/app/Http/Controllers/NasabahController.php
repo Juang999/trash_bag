@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BukuTabungan;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -42,7 +43,7 @@ class NasabahController extends Controller
 
         // dd($request->role);
 
-        User::create([
+        $user = User::create([
             'nama_lengkap' => $request->nama,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -50,6 +51,10 @@ class NasabahController extends Controller
             'alamat' => $request->alamat,
             'foto_profil' => $gambar,
             'role' => 1
+        ]);
+
+        BukuTabungan::create([
+            'user_id' => $user->id
         ]);
 
         return redirect('/nasabah')->with('status', 'Data berhasil ditambahkan');

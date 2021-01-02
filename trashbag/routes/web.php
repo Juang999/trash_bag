@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('nasabah', 'NasabahController');
 
     Route::get('jenis/getEdit/{id}', 'JenisSampahController@getEdit');
+    Route::get('jenis/delete/{id}','JenisSampahController@destroy');
     Route::resource('jenis', 'JenisSampahController');
 });
 
