@@ -28,7 +28,6 @@ class UserControllerAPI extends Controller
         $role = Auth::user()->role;
         $nama_lengkap = Auth::user()->nama_lengkap;
         $email = Auth::user()->email;
-        // dd($user);
         return response()->json(compact('token', 'role', 'nama_lengkap', 'email'));
     }
 
@@ -99,7 +98,7 @@ class UserControllerAPI extends Controller
         try {
             $User->save();
             
-            $User = User::all()->where('id', $id);
+            $User = User::find($id);
             return $this->sendResponse('berhasil', 'profil berhasil diubah', $User, 200);
         } catch (\Throwable $th) {
             return $this->sendResponse('gagal', 'profil gagal diubah', $th->getMessage(), 500);

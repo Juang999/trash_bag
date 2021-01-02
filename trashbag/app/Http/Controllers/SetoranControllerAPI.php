@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class SetoranController extends Controller
+class SetoranControllerAPI extends Controller
 {
-    public function store(Setoran $setoran, Request $request, $id)
+    public function store(Setoran $setoran, Request $request)
     {
         $validator = Validator::make($request->all(), [
             'id' => 'required',
@@ -25,6 +25,8 @@ class SetoranController extends Controller
         $harga = JenisSampah::select('harga')->where('id', $request->jenis_sampah)->first();
 
         $debit = $request->berat * $harga->harga;
+
+        $id = Auth::user()->id;
 
         $setoran->user_id = $request->id;
         $setoran->jenis_id = $request->jenis_sampah;
@@ -44,8 +46,10 @@ class SetoranController extends Controller
         }
     }
 
-    public function jemput(Request $request, Setoran $setoran, $id)
+    public function jemput(Request $request, Setoran $setoran)
     {
+        $id = Auth::user()->id;
+
         $setoran->user_id = $id;
         $setoran->jenis_id = $request->jenis_sampah;           
 
@@ -56,6 +60,39 @@ class SetoranController extends Controller
             return $this->sendResponse('berhasil', 'data penjemputan berhasil diambil', $jemput, 200);
         } catch (\Throwable $th) {
             return $this->sendResponse('gagal', 'data gagal diambil', $th->getMessage(), 404);
+        }
+    }
+
+    public function index()
+    {
+        try {
+            $index = Setoran::  where('pj', NULL)->with('user', 'jenis')->get();
+            
+            return $this->sendResponse('berhasil', 'data berhasil ditampilkan', $index, 200);
+        } catch (\Throwable $th) {
+            return $this->sendResponse('gagal', 'data gagal ditambahkan', $th->getMessage(), 500);
+        }
+    }
+
+    public function jemputUpdate($id)
+    {
+        $id_pj = Auth::user()->id;
+
+        $setoran = Setoran::find($id);
+
+        if (!$setoran) {
+            return $this->sendResponse('gagal', 'data tidak ada', NULL, 404);
+        }
+
+        $setoran->pj = $id_pj;
+
+        try {
+            $setoran->save();
+
+            $setoran = Setoran::find($id);
+            return $this->sendResponse('berhasil', 'data berhasil diupdate', $setoran, 200);
+        } catch (\Throwable $th) {
+            return $this->sendResponse('gagal', 'data gagal diupdate', $th->getMessage(), 500);
         }
     }
 }
