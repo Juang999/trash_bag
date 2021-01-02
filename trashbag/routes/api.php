@@ -27,9 +27,10 @@ Route::get('user', 'UserControllerAPI@getAuthenticatedUser')->middleware('jwt.ve
 Route::patch('user/{id}', 'UserControllerAPI@update')->middleware('jwt.verify');
 
 //Antar & Jemput Sampah
-Route::post('store', 'SetoranController@store')->middleware('jwt.verify');
-Route::post('Jemput/{id}', 'SetoranController@jemput')->middleware('jwt.verify');
-Route::get('index', 'SetoranController@index')->middleware('jwt.verify');
+Route::post('store', 'SetoranControllerAPI@store')->middleware('jwt.verify');
+Route::post('Jemput', 'SetoranControllerAPI@jemput')->middleware('jwt.verify');
+Route::get('index', 'SetoranControllerAPI@index')->middleware('jwt.verify');
+Route::patch('updateJemput/{id}', 'SetoranControllerAPI@jemputUpdate')->middleware('jwt.verify');
 
 //Resource
 Route::resource('resource', 'UserController');
