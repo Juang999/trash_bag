@@ -20,7 +20,11 @@
                                 <li class="list-inline-item seprate">
                                     <span>/</span>
                                 </li>
-                                <li class="list-inline-item">Profile</li>
+                                <li class="list-inline-item">Pengurus</li>
+                                <li class="list-inline-item seprate">
+                                    <span>/</span>
+                                </li>
+                                <li class="list-inline-item">Detail Data Pengurus</li>
                             </ul>
                         </div>
                     </div>
@@ -60,7 +64,7 @@
                                 <img class="mx-auto d-block image img-cir img-120" src="{{ $pengurus->foto_profil }}" alt="Card image cap">
                                 <h4 class="text-sm-center mt-2 mb-1">{{ $pengurus->nama_lengkap }}</h4>
                                 <div class="location text-sm-center">
-                                    <i class="fa fa-at"></i> {{ $pengurus->email }}</div>
+                                    {{ $pengurus->email }}</div>
                             </div>
                             <hr>
                         </div>

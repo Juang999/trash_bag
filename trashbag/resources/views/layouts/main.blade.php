@@ -32,6 +32,7 @@
     <link href="{{ url('vendor/select2/select2.min.css')}}" rel="stylesheet" media="all">
     <link href="{{ url('vendor/perfect-scrollbar/perfect-scrollbar.css')}}" rel="stylesheet" media="all">
     <link href="{{ url('vendor/vector-map/jqvmap.min.css" rel="stylesheet')}}" media="all">
+    <link rel="stylesheet" type="text/css" href="{{ url('vendor/DataTables/datatables.css')}}">
 
     <!-- Main CSS-->
     <link href="{{ url('css/theme.css')}}" rel="stylesheet" media="all">
@@ -74,8 +75,13 @@
                             </a>
                         </li>
                         <li class="{{ ($menu == 'nasabah')?'active has-sub':'' }}">
-                            <a class="js-arrow" href="{{ url('/') }}">
+                            <a class="js-arrow" href="{{ url('/nasabah') }}">
                                 <i class="fas fa-users"></i>Nasabah
+                            </a>
+                        </li>
+                        <li class="{{ ($menu == 'jenis')?'active has-sub':'' }}">
+                            <a class="js-arrow" href="{{ url('/jenis') }}">
+                                <i class="fas fa-leaf"></i>Jenis Sampah
                             </a>
                         </li>
                         <li class="{{ ($menu == 'setoran')?'active has-sub':'' }}">
@@ -165,8 +171,13 @@
                                 </a>
                             </li>
                             <li class="{{ ($menu == 'nasabah')?'active has-sub':'' }}">
-                                <a href="{{ url('/') }}">
+                                <a href="{{ url('/nasabah') }}">
                                     <i class="fas fa-users"></i>Nasabah
+                                </a>
+                            </li>
+                            <li class="{{ ($menu == 'jenis')?'active has-sub':'' }}">
+                                <a href="{{ url('/jenis') }}">
+                                    <i class="fas fa-leaf"></i>Jenis Sampah
                                 </a>
                             </li>
                             <li class="{{ ($menu == 'setoran')?'active has-sub':'' }}">
@@ -234,6 +245,7 @@
     <script src="{{ url('vendor/vector-map/jquery.vmap.min.js')}}"></script>
     <script src="{{ url('vendor/vector-map/jquery.vmap.sampledata.js')}}"></script>
     <script src="{{ url('vendor/vector-map/jquery.vmap.world.js')}}"></script>
+    <script type="text/javascript" charset="utf8" src="{{ url('vendor/DataTables/datatables.js')}}"></script>
 
     <!-- Main JS-->
     <script src="{{ url('js/main.js')}}"></script>

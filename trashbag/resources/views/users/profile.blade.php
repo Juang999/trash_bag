@@ -53,7 +53,7 @@
                                 <img class="mx-auto d-block image img-cir img-120" src="{{ Auth::user()->foto_profil }}" alt="Card image cap">
                                 <h4 class="text-sm-center mt-2 mb-1">{{ Auth::user()->nama_lengkap }}</h4>
                                 <div class="location text-sm-center">
-                                    <i class="fa fa-at"></i> {{ Auth::user()->email }}</div>
+                                    {{ Auth::user()->email }}</div>
                             </div>
                             <hr>
                             <div class="card-text text-sm-center">

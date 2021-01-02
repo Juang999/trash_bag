@@ -28,8 +28,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController');
 
     Route::resource('pengurus', 'PengurusController');
-    Route::get('pengurus/getUpdate/{id}', 'PengurusController@getUpdate');
-    Route::put('pengurus/editFoto/{id}', 'PengurusController@editFoto');
+
+    Route::resource('nasabah', 'NasabahController');
+
+    Route::get('jenis/getEdit/{id}', 'JenisSampahController@getEdit');
+    Route::resource('jenis', 'JenisSampahController');
 });
 
 

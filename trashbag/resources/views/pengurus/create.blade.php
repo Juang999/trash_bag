@@ -20,7 +20,11 @@
                                 <li class="list-inline-item seprate">
                                     <span>/</span>
                                 </li>
-                                <li class="list-inline-item">Profile</li>
+                                <li class="list-inline-item">Pengurus</li>
+                                <li class="list-inline-item seprate">
+                                    <span>/</span>
+                                </li>
+                                <li class="list-inline-item">Tambah Data Pengurus</li>
                             </ul>
                         </div>
                     </div>

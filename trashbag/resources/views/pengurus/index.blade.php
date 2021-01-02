@@ -54,16 +54,14 @@
                                 </select>
                                 <div class="dropDownSelect2"></div>
                             </div>
-                            <div class="rs-select2--light rs-select2--sm">
-                                <select class="js-select2" name="time">
-                                    <option selected="selected">Today</option>
-                                    <option value="">3 Days</option>
-                                    <option value="">1 Week</option>
-                                </select>
-                                <div class="dropDownSelect2"></div>
+                            <div class="rs-select2--light rs-select2--lg">
+                                <div class="input-group mb-3">
+                                    <input type="text" id="cari" class="form-control" placeholder="Search.." aria-label="Recipient's username" aria-describedby="button-addon2">
+                                    <div class="input-group-append">
+                                      <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="tableFilterCari()">Button</button>
+                                    </div>
+                                </div>
                             </div>
-                            <button class="au-btn-filter">
-                                <i class="zmdi zmdi-filter-list"></i>filters</button>
                         </div>
                         <div class="table-data__tool-right">
                             <a href="{{ url('pengurus/create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small">
@@ -91,7 +89,7 @@
                                 @else
                                     @foreach ($pengurus as $key => $item)
                                     <tr class="tr-shadow">
-                                        <td>{{ $pengurus->firstItem()+$key }}</td>
+                                        <td>{{ $key+1 }}</td>
                                         <td>
                                             <img class="mx-auto d-block image img-cir img-120" src="{{ $item->foto_profil }}" alt="">
                                         </td>
@@ -134,8 +132,6 @@
                     </div>
                     <!-- END DATA TABLE -->
 
-                    {{ $pengurus->links('vendor.pagination.default') }}
-
                 </div>
             </div>
         </div>
@@ -156,6 +152,28 @@
             tr = table.getElementsByTagName('tr');
             for(i = 0; i< tr.length; i++){
                 td = tr[i].getElementsByTagName('td')[5];
+                if(td){
+                    if(td.innerHTML.toUpperCase().indexOf(filter) > -1){
+                        tr[i].style.display = "";
+                    }else{
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        $('#cari').on('keypress', 13, function(){
+            tableFilterCari();
+        })
+
+        function tableFilterCari(){
+            var input, filter, table, tr, td, i;
+            input  = document.getElementById('cari');
+            filter = input.value.toUpperCase();
+            table = document.getElementById('tabelPengurus');
+            tr = table.getElementsByTagName('tr');
+            for(i = 0; i< tr.length; i++){
+                td = tr[i].getElementsByTagName('td')[2];
                 if(td){
                     if(td.innerHTML.toUpperCase().indexOf(filter) > -1){
                         tr[i].style.display = "";
