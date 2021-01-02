@@ -16,12 +16,12 @@ class CreateBukuTabungansTable extends Migration
         Schema::create('buku_tabungans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('jenis_id')->constrained('jenissampah');
-            $table->tinyInteger('keterangan');
-            $table->double('berat');
-            $table->integer('debit');
-            $table->integer('kredit');
-            $table->integer('saldo');
+            $table->foreignId('jenis_id')->nullable()->constrained('jenissampah');
+            $table->tinyInteger('keterangan')->nullable();
+            $table->double('berat')->nullable();
+            $table->integer('debit')->nullable();
+            $table->integer('kredit')->nullable();
+            $table->integer('saldo')->nullable();
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Setoran;
 use App\JenisSampah;
+use App\BukuTabungan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -34,6 +35,12 @@ class SetoranControllerAPI extends Controller
         $setoran->keterangan = $request->keterangan;
         $setoran->berat = $request->berat;
         $setoran->debit = $debit;
+
+        $tabungan = BukuTabungan::find($request->id);
+
+        if ($tabungan->debit == NULL) {
+            $tabungan->debit = $debit;
+        }
 
 
         try {

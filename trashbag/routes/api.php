@@ -31,6 +31,7 @@ Route::post('store', 'SetoranControllerAPI@store')->middleware('jwt.verify');
 Route::post('Jemput', 'SetoranControllerAPI@jemput')->middleware('jwt.verify');
 Route::get('index', 'SetoranControllerAPI@index')->middleware('jwt.verify');
 Route::patch('updateJemput/{id}', 'SetoranControllerAPI@jemputUpdate')->middleware('jwt.verify');
+Route::patch('jumlahJemput/{id}', 'SetoranControllerAPI@jumlahUpdate')->middleware('jwt.verify');
 
 //Resource
 Route::resource('resource', 'UserController');

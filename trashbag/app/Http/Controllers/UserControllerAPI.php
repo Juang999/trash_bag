@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\BukuTabungan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -25,6 +26,7 @@ class UserControllerAPI extends Controller
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
+
         $role = Auth::user()->role;
         $nama_lengkap = Auth::user()->nama_lengkap;
         $email = Auth::user()->email;
@@ -47,6 +49,10 @@ class UserControllerAPI extends Controller
             'nama_lengkap' => $request->get('nama_lengkap'),
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
+        ]);
+
+        $Tabungan = BukuTabungan::create([
+            'user_id' => $user->id
         ]);
 
         $token = JWTAuth::fromUser($user);
