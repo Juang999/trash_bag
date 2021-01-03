@@ -68,7 +68,7 @@ class UserSeeder extends Seeder
             'no_telepon'=> '0874788587667',
             'alamat'=>'pondok programmer', 
             'foto_profil' => 'https://via.placeholder.com/150',
-            'role'=> '3'
+            'role'=> '1'
             ]
         ]);
     }
