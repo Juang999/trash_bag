@@ -13,14 +13,12 @@ class JenisSeeder extends Seeder
     {
         DB::table('jenissampah')->insert([
             [
-                'jenis_sampah' => 'besi',
-                'harga' => 15000,
-            ],[
-                'jenis_sampah' => 'botol',
-                'harga' => 5000,
-            ],[
-                'jenis_sampah' => 'kaca',
-                'harga' => 10000,
+                'jenis_sampah' => 'Plastik',
+                'harga' => 300
+            ],
+            [
+                'jenis_sampah' => 'Besi',
+                'harga' => 3000
             ]
         ]);
     }

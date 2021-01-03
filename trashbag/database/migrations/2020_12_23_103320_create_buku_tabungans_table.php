@@ -21,7 +21,7 @@ class CreateBukuTabungansTable extends Migration
             $table->double('berat')->nullable();
             $table->integer('debit')->nullable();
             $table->integer('kredit')->nullable();
-            $table->integer('saldo')->nullable();
+            $table->integer('saldo')->default(0);
             $table->timestamps();
         });
     }
