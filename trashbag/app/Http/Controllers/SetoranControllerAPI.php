@@ -139,6 +139,7 @@ class SetoranControllerAPI extends Controller
 
         $saldo = $BukuTabungan->saldo + $debit;
 
+        $setoran->berat = $request->berat;
         $setoran->debit = $debit;
 
         $BukuTabungan->berat = $request->berat;
