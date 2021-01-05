@@ -36,4 +36,36 @@ class TabunganControllerAPI extends Controller
             return $this->sendResponse('gagal', 'saldo nasabah tidak ada', $th->getMessage(), 404);
         }
     }
+
+    public function update(Request $request, BukuTabungan $BukuTabungan)
+    {
+        $user_id = Auth::user()->id;
+
+        $saldo = BukuTabungan::where('user_id', $user_id)->latest()->first();
+
+        $penarikan = $request->penarikan;
+
+        if ($penarikan > $saldo->saldo) {
+            return $this->sendResponse('gagaal', 'saldo anda tidak mencukupi', NULL, 500);
+        }
+
+        // dd($BukuTabungan->saldo);
+
+        $saldo = $saldo->saldo - $penarikan;
+
+        $BukuTabungan->user_id = $user_id;
+        $BukuTabungan->kredit = $penarikan;
+        $BukuTabungan->saldo = $saldo;
+
+        try {
+            $BukuTabungan->save();
+
+            $BukuTabungan = BukuTabungan::where('user_id', $user_id)->latest()->first();
+            return $this->sendResponse('berhasil', 'berhasil menarik saldo', $BukuTabungan, 200);
+        } catch (\Throwable $th) {
+            return $this->sendResponse('gagal', 'gagal menarik saldo', $th->getMessage(), 500);
+        }
+
+        
+    }
 }
