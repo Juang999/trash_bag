@@ -64,7 +64,7 @@ class UserSeeder extends Seeder
             ],[
             'nama_lengkap' => 'zen',
             'email' => 'zen@yahoo.com',
-            'password' => Hash::make('12345678090'),
+            'password' => Hash::make('1234567890'),
             'no_telepon'=> '0874788587667',
             'alamat'=>'pondok programmer', 
             'foto_profil' => 'https://via.placeholder.com/150',
