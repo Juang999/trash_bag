@@ -49886,8 +49886,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/trash_bag/trashbag/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/html/trash_bag/trashbag/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/moscow666/trash_bag/trashbag/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/moscow666/trash_bag/trashbag/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
