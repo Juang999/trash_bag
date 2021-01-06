@@ -85,12 +85,12 @@
                             </a>
                         </li>
                         <li class="{{ ($menu == 'setoran')?'active has-sub':'' }}">
-                            <a class="js-arrow" href="{{ url('/') }}">
+                            <a class="js-arrow" href="{{ url('/setoran') }}">
                                 <i class="fas fa-leaf"></i>Setoran
                             </a>
                         </li>
                         <li class="{{ ($menu == 'penjualan')?'active has-sub':'' }}">
-                            <a class="js-arrow" href="{{ url('/') }}">
+                            <a class="js-arrow" href="{{ url('/penjualan') }}">
                                 <i class="fas fa-hand-holding-usd"></i>Penjualan
                             </a>
                         </li>
@@ -181,12 +181,12 @@
                                 </a>
                             </li>
                             <li class="{{ ($menu == 'setoran')?'active has-sub':'' }}">
-                                <a href="{{ url('/') }}">
+                                <a href="{{ url('/setoran') }}">
                                     <i class="fas fa-leaf"></i>Setoran
                                 </a>
                             </li>
                             <li class="{{ ($menu == 'penjualan')?'active has-sub':'' }}">
-                                <a href="{{ url('/') }}">
+                                <a href="{{ url('/penjualan') }}">
                                     <i class="fas fa-hand-holding-usd"></i>Penjualan
                                 </a>
                             </li>

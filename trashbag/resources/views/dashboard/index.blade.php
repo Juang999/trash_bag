@@ -38,7 +38,7 @@
             <div class="row">
                 <div class="col-md-6 col-lg-6">
                     <div class="statistic__item">
-                        <h2 class="number">10,368</h2>
+                        <h2 class="number">{{ $nasabah->jumlah }}</h2>
                         <span class="desc">Nasabah</span>
                         <div class="icon">
                             <i class="zmdi zmdi-account-o"></i>

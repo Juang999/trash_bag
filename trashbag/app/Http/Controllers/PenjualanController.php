@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 
 class PenjualanController extends Controller
 {
+<<<<<<< HEAD
     public function store(Request $request, Penjualan $penjualan, Keuangan $keuangan)
     {
         $validator = Validator::make($request->all(), [
@@ -54,4 +55,9 @@ class PenjualanController extends Controller
 
 
     } 
+=======
+    public function index(){
+        return view('penjualan.index', ['menu'=> 'penjualan']);
+    }
+>>>>>>> eead71f2bf3104e8534a61f5aa03b0c59d0c5782
 }

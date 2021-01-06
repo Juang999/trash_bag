@@ -20,7 +20,7 @@
                                 <li class="list-inline-item seprate">
                                     <span>/</span>
                                 </li>
-                                <li class="list-inline-item">Nasabah</li>
+                                <li class="list-inline-item">Setoran Sampah</li>
                             </ul>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <!-- DATA TABLE -->
-                    <h3 class="title-5 m-b-35">Data Nasabah</h3>
+                    <h3 class="title-5 m-b-35">Data Setoran Sampah</h3>
                     <div class="table-data__tool">
                         <div class="table-data__tool-left">
                             <div class="rs-select2--light rs-select2--lg">
@@ -54,55 +54,42 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="table-data__tool-right">
-                            <a href="{{ url('nasabah/create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                <i class="zmdi zmdi-plus"></i>add user</a>
-                        </div>
                     </div>
                     <div class="table-responsive table-responsive-data2">
-                        <table class="table table-data2" id="dataTable">
+                        <table class="table table-data2" id="tabelPengurus">
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th></th>
-                                    <th>Nama Lengkap</th>
-                                    <th>Email</th>
-                                    <th>No. Telepon</th>
-                                    <th>Aksi</th>
+                                    <th>Tanggal</th>
+                                    <th>Nasabah</th>
+                                    <th>Keterangan</th>
+                                    <th>Jenis Sampah</th>
+                                    <th>Harga/kg</th>
+                                    <th>Berat</th>
+                                    <th>Debit</th>
+                                    <th>Penanggung Jawab</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($nasabah->count() == 0)
-                                    <tr>
-                                        <td colspan="6" style="text-align: center">Belum ada data</td>
-                                    </tr>
-                                @else
-                                    @foreach ($nasabah as $key => $item)
-                                    <tr class="tr-shadow">
-                                        <td>{{ $key+1 }}</td>
-                                        <td>
-                                            <img class="mx-auto d-block image img-cir img-120" src="{{ $item->foto_profil }}" alt="">
-                                        </td>
-                                        <td>{{ $item->nama_lengkap }}</td>
-                                        <td>{{ $item->email }}</td>
-                                        <td>{{ $item->no_telepon }}</td>
-                                        <td>
-                                            <div class="table-data-feature">
-                                                <a href="{{ url('nasabah/'.$item->id) }}" class="item" data-toggle="tooltip" data-placement="top" title="Detail">
-                                                    <i class="zmdi zmdi-info"></i>
-                                                </a>
-                                                <a href="{{ url('nasabah/'.$item->id.'/edit') }}" class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                    <i class="zmdi zmdi-edit"></i>
-                                                </a>
-                                                <a href="{{ url('nasabah/delete/'.$item->id) }}" class="item" data-toggle="tooltip" data-placement="top" title="Delete" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                                    <i class="zmdi zmdi-delete"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr class="spacer"></tr>
-                                    @endforeach
-                                @endif
+                                @foreach ($setoran as $key => $item)
+                                <tr>
+                                    <td>{{ $key+1 }}</td>
+                                    <td>{{ date('D, j F Y',strtotime($item->created_at)) }}</td>
+                                    <td>{{ $item->user->nama_lengkap }}</td>
+                                    <td>
+                                        @if ($item->keterangan == 1)
+                                            Dijemput
+                                        @else
+                                            Diantar
+                                        @endif
+                                    </td>
+                                    <td>{{ $item->jenis->jenis_sampah }}</td>
+                                    <td>{{ $item->jenis->harga }}</td>
+                                    <td>{{ $item->berat }}kg</td>
+                                    <td>{{ $item->debit }}</td>
+                                    <td>{{ $item->penanggungJawab->nama_lengkap }}</td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
