@@ -16,33 +16,27 @@ class SetoranSeeder extends Seeder
                 'user_id' => 1,
                 'jenis_id' => 1,
             ],[
-                'user_id' => 1,
+                'user_id' => 2,
                 'jenis_id' => 2,
             ],[
                 'user_id' => 1,
-                'jenis_id' => 3,
-            ],[
-                'user_id' => 2,
                 'jenis_id' => 1,
             ],[
                 'user_id' => 2,
                 'jenis_id' => 2,
             ],[
-                'user_id' => 2,
-                'jenis_id' => 3,
-            ],[
                 'user_id' => 1,
                 'jenis_id' => 1,
             ],[
-                'user_id' => 1,
+                'user_id' => 2,
                 'jenis_id' => 2,
             ],[
                 'user_id' => 1,
-                'jenis_id' => 3,
+                'jenis_id' => 1,
             ],[
                 'user_id' => 2,
-                'jenis_id' => 1,
-            ]
+                'jenis_id' => 2,
+            ],
         ]);
     }
 }
