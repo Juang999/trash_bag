@@ -20,7 +20,11 @@
                                 <li class="list-inline-item seprate">
                                     <span>/</span>
                                 </li>
-                                <li class="list-inline-item">Profile</li>
+                                <li class="list-inline-item">Nasabah</li>
+                                <li class="list-inline-item seprate">
+                                    <span>/</span>
+                                </li>
+                                <li class="list-inline-item">Detail Data Nasabah</li>
                             </ul>
                         </div>
                     </div>
@@ -87,16 +91,60 @@
                                         <td class="col-2">Alamat</td>
                                         <td class="col">{{ $nasabah->alamat }}</td>
                                     </tr>
-                                    <tr>
-                                        <td class="col-2"></td>
-                                        <td class="col">
-                                            <a href="" class="btn btn-outline-primary">Buku Tabungan</a>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row m-t-3">
+                <div class="col-md-12">
+                    <!-- DATA TABLE-->
+                    <div class="table-responsive m-b-40" style="overflow-y: scroll; max-height:350px">
+                        <table class="table table-borderless table-data3">
+                            <thead style="position: sticky; top:0;">
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Tanggal</th>
+                                    <th>Keterangan</th>
+                                    <th>Jenis Sampah</th>
+                                    <th>Berat/kg</th>
+                                    <th>Debet</th>
+                                    <th>Kredit</th>
+                                    <th>Saldo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($nasabah->BukuTabungan as $key => $item)
+                                <tr>
+                                    <td>{{ $key+1 }}</td>
+                                    <td>{{ date('D, j F Y',strtotime($item->created_at)) }}</td>
+                                    <td>
+                                        @if (is_null($item->keterangan))
+                                            -
+                                        @elseif($item->keterangan == 1)
+                                            Dijemput
+                                        @else
+                                            Diantar
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if (is_null($item->jenis_id))
+                                            -
+                                        @else
+                                            {{ $item->jenis->jenis_sampah}}
+                                        @endif
+                                    </td>
+                                    <td>{{$item->berat}}</td>
+                                    <td>{{ (is_null($item->debit))?'-':$item->debit }}</td>
+                                    <td>{{ (is_null($item->kredit))?'-':$item->kredit }}</td>
+                                    <td>{{ $item->saldo }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- END DATA TABLE-->
                 </div>
             </div>
         </div>

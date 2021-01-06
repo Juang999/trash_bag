@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\BukuTabungan;
+use App\Setoran;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -17,9 +18,10 @@ class NasabahController extends Controller
     }
 
     public function show($id){
-        $nasabah = User::find($id);
+        $nasabah = User::where('id',$id)->with('BukuTabungan', 'BukuTabungan.jenis')->first();
         return view('nasabah.detail', ['menu'=>'nasabah', 'nasabah'=>$nasabah]);
     }
+
 
     public function create(){
         return view('nasabah.create', ['menu'=>'nasabah']);
@@ -113,6 +115,8 @@ class NasabahController extends Controller
 
 
     public function destroy($id){
+        BukuTabungan::where('user_id', $id)->delete();
+        Setoran::where('user_id', $id)->delete();
         User::destroy($id);
         return redirect('nasabah')->with('status', 'Data berhasil dihapus');
     }

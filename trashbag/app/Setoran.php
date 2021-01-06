@@ -12,6 +12,10 @@ class Setoran extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function penanggungJawab(){
+        return $this->belongsTo('App\User', 'pj');
+    }
+
     public function jenis(){
         return $this->belongsTo('App\JenisSampah');
     }

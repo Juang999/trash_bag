@@ -113,14 +113,9 @@
                                                 <a href="{{ url('pengurus/'.$item->id.'/edit') }}" class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </a>
-                                                <form action="{{ url('pengurus/'.$item->id) }}" method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    
-                                                    <button type="submit" class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                        <i class="zmdi zmdi-delete"></i>
-                                                    </button>
-                                                </form>
+                                                <a href="{{ url('pengurus/delete/'.$item->id) }}" class="item" data-toggle="tooltip" data-placement="top" title="Delete" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                    <i class="zmdi zmdi-delete"></i>
+                                                </a>
                                             </div>
                                         </td>
                                     </tr>
