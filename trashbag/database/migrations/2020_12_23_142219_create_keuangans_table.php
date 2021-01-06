@@ -15,10 +15,10 @@ class CreateKeuangansTable extends Migration
     {
         Schema::create('keuangans', function (Blueprint $table) {
             $table->id();
-            $table->string('keterangan');
-            $table->integer('debit');
-            $table->integer('kredit');
-            $table->integer('saldo');
+            $table->string('keterangan')->nullable();
+            $table->integer('debit')->nullable();
+            $table->integer('kredit')->nullable();
+            $table->integer('saldo')->default(0);
             $table->timestamps();
         });
     }

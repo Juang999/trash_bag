@@ -36,7 +36,9 @@ Route::patch('jumlahJemput/{id}', 'SetoranControllerAPI@jemputHarga')->middlewar
 // Buku Tabungan Nasabah
 Route::get('history', 'TabunganControllerAPI@index')->middleware('jwt.verify');
 Route::get('saldo', 'TabunganControllerAPI@show')->middleware('jwt.verify');
-Route::post('penarikan', 'TabunganControllerAPI@update')->middleware('jwt.verify');
+
+// Penjualan Sampah
+Route::post('jual', 'PenjualanController@store')->middleware('jwt.verify');
 
 //Resource
 Route::resource('resource', 'UserController');
