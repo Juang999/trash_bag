@@ -14,7 +14,7 @@ class PenjualanController extends Controller
 {
     public function index(){
         $penjualan = Penjualan::with('user', 'jenis')->get();
-        dd($penjualan);
-        return view('penjualan.index', ['menu'=> 'penjualan']);
+        // dd($penjualan);
+        return view('penjualan.index', ['menu'=> 'penjualan', 'penjualan' => $penjualan]);
     }
 }

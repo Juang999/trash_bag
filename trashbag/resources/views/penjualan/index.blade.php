@@ -61,14 +61,25 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Tanggal</th>    
+                                    <th>Penanggung Jawab</th>
                                     <th>Jenis Sampah</th>
                                     <th>Harga/kg</th>
                                     <th>Berat</th>
                                     <th>Debit</th>
-                                    <th>Penanggung Jawab</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($penjualan as $key => $item)
+                                <tr>
+                                    <td>{{ $key+1 }}</td>
+                                    <td>{{ date('D, j F Y',strtotime($item->created_at)) }}</td>
+                                    <td>{{ $item->user->nama_lengkap }}</td>
+                                    <td>{{ $item->jenis->jenis_sampah }}</td>
+                                    <td>{{ $item->jenis->harga }}</td>
+                                    <td>{{ $item->berat }}kg</td>
+                                    <td>{{ $item->debit }}</td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
