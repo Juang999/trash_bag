@@ -69,6 +69,7 @@
                                 <i class="fas fa-tachometer-alt"></i>Dashboard
                             </a>
                         </li>
+                        @if (Auth::user()->role == 5)
                         <li class="{{ ($menu == 'pengurus')?'active has-sub':'' }}">
                             <a class="js-arrow" href="{{ url('/pengurus') }}">
                                 <i class="fas fa-user-tie"></i>Pengurus
@@ -84,6 +85,7 @@
                                 <i class="fas fa-leaf"></i>Jenis Sampah
                             </a>
                         </li>
+                        @endif
                         <li class="{{ ($menu == 'setoran')?'active has-sub':'' }}">
                             <a class="js-arrow" href="{{ url('/setoran') }}">
                                 <i class="fas fa-leaf"></i>Setoran
@@ -95,7 +97,7 @@
                             </a>
                         </li>
                         <li class="{{ ($menu == 'keuangan')?'active has-sub':'' }}">
-                            <a class="js-arrow" href="{{ url('/') }}">
+                            <a class="js-arrow" href="{{ url('/keuangan') }}">
                                 <i class="fas fa-dollar-sign"></i>Keuangan Bank
                             </a>
                         </li>
@@ -191,7 +193,7 @@
                                 </a>
                             </li>
                             <li class="{{ ($menu == 'keuangan')?'active has-sub':'' }}">
-                                <a href="{{ url('/') }}">
+                                <a href="{{ url('/keuangan') }}">
                                     <i class="fas fa-dollar-sign"></i>Keuangan Bank
                                 </a>
                             </li>

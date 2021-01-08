@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth','role:5,4']], function () {
     
     Route::get('/', 'HomeController@index')->name('home');
 
@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('setoran', 'SetoranController@index');
     Route::get('penjualan', 'PenjualanController@index');
+    Route::get('keuangan', 'KeuanganController@index');
 });
 
 
