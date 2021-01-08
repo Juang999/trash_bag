@@ -12,7 +12,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function sendResponse($status, $msg, $data = NULL, $code)
+    public function sendResponse($status, $msg, $data = NULL, $code = null)
     {
         return response([
             'status' => $status,
