@@ -57,19 +57,15 @@ class SetoranControllerAPI extends Controller
         }
     }
 
-    public function jemput(Request $request, Setoran $setoran, BukuTabungan $BukuTabungan)
+    public function jemput(Request $request, Setoran $setoran)
     {
         $id = Auth::user()->id;
 
         $setoran->user_id = $id;
         $setoran->jenis_id = $request->jenis_sampah;
-        
-        $BukuTabungan->user_id = $id;
-        $BukuTabungan->jenis_id = $request->jenis_sampah;
 
         try {
             $setoran->save();
-            $BukuTabungan->save();
 
             $jemput = Setoran::where('user_id', $setoran->user_id)->with('user', 'jenis')->latest()->first();
             return $this->sendResponse('berhasil', 'data penjemputan berhasil diambil', $jemput, 200);
@@ -99,14 +95,12 @@ class SetoranControllerAPI extends Controller
             return $this->sendResponse('gagal', 'data tidak ada', NULL, 404);
         }
 
-        $BukuTabungan = BukuTabungan::where('user_id', $setoran->user_id)->latest()->first();
-
         $setoran->pj = $id_pj;
-        $BukuTabungan->keterangan = $setoran->keterangan;
+
 
         try {
             $setoran->save();
-            $BukuTabungan->save();
+ 
 
             $setoran = Setoran::find($id);
             return $this->sendResponse('berhasil', 'data berhasil diupdate', $setoran, 200);
@@ -115,7 +109,7 @@ class SetoranControllerAPI extends Controller
         }
     }
 
-    public function jemputHarga(Request $request, $id)
+    public function jemputHarga(Request $request, BukuTabungan $BukuTabungan, $id)
     {
         $validator = Validator::make($request->all(), [
             'berat' => 'required'
@@ -127,25 +121,30 @@ class SetoranControllerAPI extends Controller
 
         $setoran = Setoran::find($id);
 
+        $user_id = $setoran->user_id;
+
         if (!$setoran) {
             return $this->sendResponse('gagal', 'data tidak ditemukan', NULL, 404);
         }
 
-        $harga = JenisSampah::select('harga')->where('id', $setoran->jenis_id)->first();
+        $saldo1 = Bukutabungan::where('user_id', $user_id)->latest()->first();
 
-        $BukuTabungan = BukuTabungan::where('user_id', $setoran->user_id)->latest()->first();
+        $harga = JenisSampah::select('harga')->where('id', $setoran->jenis_id)->first();
 
         $debit = ($request->berat * $harga->harga) - (($request->berat * $harga->harga) * 20 / 100);
 
-        $saldo = $BukuTabungan->saldo + $debit;
+        $saldo = $saldo1->saldo + $debit;
 
         $setoran->berat = $request->berat;
         $setoran->debit = $debit;
 
-        $BukuTabungan->berat = $request->berat;
+        $BukuTabungan->user_id = $setoran->user_id;
+        $BukuTabungan->jenis_id = $setoran->jenis_id;
+        $BukuTabungan->keterangan = $setoran->keterangan;
         $BukuTabungan->debit = $debit;
         $BukuTabungan->saldo = $saldo;
 
+        
         try {
             $setoran->save();
             $BukuTabungan->save();
