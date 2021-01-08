@@ -10,7 +10,7 @@ class JenisSampahControllerAPI extends Controller
 {
     public function index()
     {
-        $JenisSampah = JenisSampah::all('jenis_sampah');
+        $JenisSampah = JenisSampah::all('id','jenis_sampah');
 
         if (!$JenisSampah) {
             return $this->sendResponse('gagal', 'nama sampah tidak ditemukan', NULL, 404);

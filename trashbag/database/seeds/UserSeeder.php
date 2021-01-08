@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
             'role'=> '1'
             ],[
             'nama_lengkap' => 'Ahmad Dani',
-            'email' => 'AhmadDani123@gmail.com',
+            'email' => 'zen1@yahoo.com',
             'password' => Hash::make('Ahmad123'),
             'no_telepon'=> '087871504747',
             'alamat'=>'pondok programmer', 

@@ -41,7 +41,7 @@ Route::get('saldo', 'TabunganControllerAPI@show')->middleware('jwt.verify');
 Route::post('Jual', 'PenjualanControllerAPI@store')->middleware('jwt.verify');
 
 // Get Jenis Sampah
-Route::get('jenis', 'JenisSampahControllerAPI@index')->middleware('jwt.verify');
+Route::get('jenis', 'JenisSampahControllerAPI@index');
 
 //Resource
 Route::resource('resource', 'UserController');
