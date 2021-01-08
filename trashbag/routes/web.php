@@ -21,6 +21,12 @@ Route::group(['middleware' => ['auth','role:5,4']], function () {
     
     Route::get('/', 'HomeController@index')->name('home');
 
+    Route::get('setoran', 'SetoranController@index');
+    Route::get('penjualan', 'PenjualanController@index');
+    Route::get('keuangan', 'KeuanganController@index');
+});
+
+Route::group(['middleware' => ['auth', 'role:5']], function () {
     Route::get('user/profile', 'UserController@profile');
     Route::get('user/{id}', 'UserController@getUbah');
     Route::put('user/editFoto/{id}', 'UserController@editFoto');
@@ -36,10 +42,6 @@ Route::group(['middleware' => ['auth','role:5,4']], function () {
     Route::get('jenis/getEdit/{id}', 'JenisSampahController@getEdit');
     Route::get('jenis/delete/{id}','JenisSampahController@destroy');
     Route::resource('jenis', 'JenisSampahController');
-
-    Route::get('setoran', 'SetoranController@index');
-    Route::get('penjualan', 'PenjualanController@index');
-    Route::get('keuangan', 'KeuanganController@index');
 });
 
 
