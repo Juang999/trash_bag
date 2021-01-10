@@ -61,14 +61,23 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Tanggal</th>    
-                                    <th>Jenis Sampah</th>
-                                    <th>Harga/kg</th>
-                                    <th>Berat</th>
+                                    <th>keterangan</th>
                                     <th>Debit</th>
-                                    <th>Penanggung Jawab</th>
+                                    <th>Kredit</th>
+                                    <th>Saldo</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($keuangan as $key => $item)
+                                <tr>
+                                    <td>{{ $key+1 }}</td>
+                                    <td>{{ date('D, j F Y',strtotime($item->created_at)) }}</td>
+                                    <td>{{ $item->keterangan }}</td>
+                                    <td>{{ $item->debit }}</td>
+                                    <td>{{ $item->kredit }}</td>
+                                    <td>{{ $item->saldo }}</td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

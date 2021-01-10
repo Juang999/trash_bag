@@ -61,7 +61,7 @@
                                     <i class="fas fa-trash"></i>
                                 </div>
                                 <div class="text">
-                                    <h2>388,688</h2>
+                                    <h2>{{ number_format($setoran->jumlah, 2, ",", ".") }} Kg</h2>
                                     <span>Total Setoran</span>
                                 </div>
                             </div>
@@ -78,7 +78,7 @@
                                     <i class="fas fa-hand-holding-usd"></i>
                                 </div>
                                 <div class="text">
-                                    <h2>1,086</h2>
+                                    <h2>{{ number_format($penjualan->jumlah,2,",",".") }} Kg</h2>
                                     <span>Sampah Terjual</span>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                                     <i class="fas fa-box"></i>
                                 </div>
                                 <div class="text">
-                                    <h2>1,086</h2>
+                                    <h2>{{ number_format($setoran->jumlah - $penjualan->jumlah,2,',','.') }} Kg</h2>
                                     <span>Sampah Tersimpan</span>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                                     <i class="zmdi zmdi-money"></i>
                                 </div>
                                 <div class="text">
-                                    <h2>$1,060,386</h2>
+                                    <h2>Rp {{ number_format($keuangan->saldo,0,"",".") }}</h2>
                                     <span>Total Saldo</span>
                                 </div>
                             </div>
