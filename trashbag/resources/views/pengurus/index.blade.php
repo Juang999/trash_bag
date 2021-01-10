@@ -45,23 +45,6 @@
                     <h3 class="title-5 m-b-35">Data Pengurus</h3>
                     <div class="table-data__tool">
                         <div class="table-data__tool-left">
-                            <div class="rs-select2--light rs-select2--md">
-                                <select class="js-select2" name="property" id="select1" onchange="tableFilter()">
-                                    <option value="">Pilih level user</option>
-                                    <option value="Pengurus 1">Pengurus 1</option>
-                                    <option value="Pengurus 2">Pengurus 2</option>
-                                    <option value="Bendahara">Bendahara</option>
-                                </select>
-                                <div class="dropDownSelect2"></div>
-                            </div>
-                            <div class="rs-select2--light rs-select2--lg">
-                                <div class="input-group mb-3">
-                                    <input type="text" id="cari" class="form-control" placeholder="Search.." aria-label="Recipient's username" aria-describedby="button-addon2">
-                                    <div class="input-group-append">
-                                      <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="tableFilterCari()">Button</button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <div class="table-data__tool-right">
                             <a href="{{ url('pengurus/create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small">
@@ -69,7 +52,7 @@
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-data2">
-                        <table class="table table-data2" id="tabelPengurus">
+                        <table id="table_id" class="table table-data2 display">
                             <thead>
                                 <tr>
                                     <th>No.</th>
@@ -82,26 +65,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($pengurus->count() == 0)
+
+                                @foreach ($pengurus as $key => $item)
                                     <tr>
-                                        <td colspan="6" style="text-align: center">Belum ada data</td>
-                                    </tr>
-                                @else
-                                    @foreach ($pengurus as $key => $item)
-                                    <tr class="tr-shadow">
                                         <td>{{ $key+1 }}</td>
-                                        <td>
-                                            <img class="mx-auto d-block image img-cir img-120" src="{{ $item->foto_profil }}" alt="">
-                                        </td>
+                                        <td><img class="mx-auto d-block image img-cir img-120" src="{{ $item->foto_profil }}" alt=""></td>
                                         <td>{{ $item->nama_lengkap }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->no_telepon }}</td>
                                         <td>
                                             @if ($item->role == 2)
-                                                Pengurus 1 (Setoran)
-                                            @elseif ($item->role == 3)
-                                                Pengurus 2 (Penjualan)
-                                            @else 
+                                                Pengurus 1
+                                            @elseif($item->role == 3)
+                                                Pengurus 2
+                                            @else
                                                 Bendahara
                                             @endif
                                         </td>
@@ -119,9 +96,7 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr class="spacer"></tr>
-                                    @endforeach
-                                @endif
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -138,45 +113,47 @@
 
 @section('script')
     <script>
+        $(document).ready(function(){
+            $('#table_id').DataTable();
+        });
+        // function tableFilter(){
+        //     var input, filter, table, tr, td, i;
+        //     input  = document.getElementById('select1');
+        //     filter = input.value.toUpperCase();
+        //     table = document.getElementById('tabelPengurus');
+        //     tr = table.getElementsByTagName('tr');
+        //     for(i = 0; i< tr.length; i++){
+        //         td = tr[i].getElementsByTagName('td')[5];
+        //         if(td){
+        //             if(td.innerHTML.toUpperCase().indexOf(filter) > -1){
+        //                 tr[i].style.display = "";
+        //             }else{
+        //                 tr[i].style.display = "none";
+        //             }
+        //         }
+        //     }
+        // }
 
-        function tableFilter(){
-            var input, filter, table, tr, td, i;
-            input  = document.getElementById('select1');
-            filter = input.value.toUpperCase();
-            table = document.getElementById('tabelPengurus');
-            tr = table.getElementsByTagName('tr');
-            for(i = 0; i< tr.length; i++){
-                td = tr[i].getElementsByTagName('td')[5];
-                if(td){
-                    if(td.innerHTML.toUpperCase().indexOf(filter) > -1){
-                        tr[i].style.display = "";
-                    }else{
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
+        // $('#cari').on('keypress', 13, function(){
+        //     tableFilterCari();
+        // })
 
-        $('#cari').on('keypress', 13, function(){
-            tableFilterCari();
-        })
-
-        function tableFilterCari(){
-            var input, filter, table, tr, td, i;
-            input  = document.getElementById('cari');
-            filter = input.value.toUpperCase();
-            table = document.getElementById('tabelPengurus');
-            tr = table.getElementsByTagName('tr');
-            for(i = 0; i< tr.length; i++){
-                td = tr[i].getElementsByTagName('td')[2];
-                if(td){
-                    if(td.innerHTML.toUpperCase().indexOf(filter) > -1){
-                        tr[i].style.display = "";
-                    }else{
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
+        // function tableFilterCari(){
+        //     var input, filter, table, tr, td, i;
+        //     input  = document.getElementById('cari');
+        //     filter = input.value.toUpperCase();
+        //     table = document.getElementById('tabelPengurus');
+        //     tr = table.getElementsByTagName('tr');
+        //     for(i = 0; i< tr.length; i++){
+        //         td = tr[i].getElementsByTagName('td')[2];
+        //         if(td){
+        //             if(td.innerHTML.toUpperCase().indexOf(filter) > -1){
+        //                 tr[i].style.display = "";
+        //             }else{
+        //                 tr[i].style.display = "none";
+        //             }
+        //         }
+        //     }
+        // }
     </script>
 @endsection
