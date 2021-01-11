@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-data2">
-                        <table class="table table-data2" id="tabelData">
+                        <table class="table table-data2" id="table_id">
                             <thead>
                                 <tr>
                                     <th>No.</th>
@@ -70,11 +70,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($jenisSampah->count() == 0)
-                                    <tr>
-                                        <td colspan="6" style="text-align: center">Belum ada data</td>
-                                    </tr>
-                                @else
                                     @foreach ($jenisSampah as $key => $item)
                                     <tr class="tr-shadow">
                                         <td>{{ $key+1 }}</td>
@@ -93,9 +88,7 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr class="spacer"></tr>
                                     @endforeach
-                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -189,43 +182,25 @@
 
 @section('script')
     <script>
-
-
-        $('#cari').on('keypress', 13, function(){
-            tableFilterCari();
-        })
-
-        function tableFilterCari(){
-            var input, filter, table, tr, td, i;
-            input  = document.getElementById('cari');
-            filter = input.value.toUpperCase();
-            table = document.getElementById('tabelData');
-            tr = table.getElementsByTagName('tr');
-            for(i = 0; i< tr.length; i++){
-                td = tr[i].getElementsByTagName('td')[1];
-                if(td){
-                    if(td.innerHTML.toUpperCase().indexOf(filter) > -1){
-                        tr[i].style.display = "";
-                    }else{
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
-
-        $('.btnEdit').on('click', function(){
-            const id = $(this).data('id');
-            $('#formEdit').attr('action', 'jenis/'+id);
-            $.ajax({
-                    url:'jenis/getEdit/'+id,
-                    method: 'get', 
-                    dataType: 'json',
-                    success:function(data){
-                        console.log(data);
-                        $('#formEdit #jenis_sampah').val(data.jenis_sampah);
-                        $('#formEdit #harga').val(data.harga);
-                    }
-                });
+        $(document).ready(function(){
+            var table = $('#table_id').DataTable();
+            
+            $('.btnEdit').on('click', function(){
+                const id = $(this).data('id');
+                $('#formEdit').attr('action', 'jenis/'+id);
+                $.ajax({
+                        url:'jenis/getEdit/'+id,
+                        method: 'get', 
+                        dataType: 'json',
+                        success:function(data){
+                            console.log(data);
+                            $('#formEdit #jenis_sampah').val(data.jenis_sampah);
+                            $('#formEdit #harga').val(data.harga);
+                        }
+                    });
+            });
         });
+
+
     </script>
 @endsection

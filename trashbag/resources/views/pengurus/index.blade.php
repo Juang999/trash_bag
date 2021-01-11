@@ -60,7 +60,15 @@
                                     <th>Nama Lengkap</th>
                                     <th>Email</th>
                                     <th>No. Telepon</th>
-                                    <th>Lev. User</th>
+                                    <th>
+                                        <label for="select-filter">Level User</label>
+                                        <select name="select-filter" class="form-control form-control-sm select-filter" id="select-filter">
+                                            <option value="">Filter</option>
+                                            <option value="pengurus 1">Pengurus 1</option>
+                                            <option value="pengurus 2">Pengurus 2</option>
+                                            <option value="bendahara">Bendahara</option>
+                                        </select>
+                                    </th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -114,46 +122,15 @@
 @section('script')
     <script>
         $(document).ready(function(){
-            $('#table_id').DataTable();
+            var table = $('#table_id').DataTable({
+                columnDefs: [
+                    { orderable: false, targets: [1,5] }
+                ]
+            });
+
+            $('.select-filter').on('change',function(){
+                table.search($(this).val()).draw();
+            });
         });
-        // function tableFilter(){
-        //     var input, filter, table, tr, td, i;
-        //     input  = document.getElementById('select1');
-        //     filter = input.value.toUpperCase();
-        //     table = document.getElementById('tabelPengurus');
-        //     tr = table.getElementsByTagName('tr');
-        //     for(i = 0; i< tr.length; i++){
-        //         td = tr[i].getElementsByTagName('td')[5];
-        //         if(td){
-        //             if(td.innerHTML.toUpperCase().indexOf(filter) > -1){
-        //                 tr[i].style.display = "";
-        //             }else{
-        //                 tr[i].style.display = "none";
-        //             }
-        //         }
-        //     }
-        // }
-
-        // $('#cari').on('keypress', 13, function(){
-        //     tableFilterCari();
-        // })
-
-        // function tableFilterCari(){
-        //     var input, filter, table, tr, td, i;
-        //     input  = document.getElementById('cari');
-        //     filter = input.value.toUpperCase();
-        //     table = document.getElementById('tabelPengurus');
-        //     tr = table.getElementsByTagName('tr');
-        //     for(i = 0; i< tr.length; i++){
-        //         td = tr[i].getElementsByTagName('td')[2];
-        //         if(td){
-        //             if(td.innerHTML.toUpperCase().indexOf(filter) > -1){
-        //                 tr[i].style.display = "";
-        //             }else{
-        //                 tr[i].style.display = "none";
-        //             }
-        //         }
-        //     }
-        // }
     </script>
 @endsection
