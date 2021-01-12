@@ -45,44 +45,17 @@
                     <h3 class="title-5 m-b-35">Data Setoran Sampah</h3>
                     <div class="row">
                         <div class="col-lg-6">
-                            <h2 class="title-1 m-b-25">Top countries</h2>
                             <div class="au-card au-card--bg-blue au-card-top-countries m-b-40">
                                 <div class="au-card-inner">
                                     <div class="table-responsive">
                                         <table class="table table-top-countries">
                                             <tbody>
+                                                @foreach ($jumlah as $item)
                                                 <tr>
-                                                    <td>United States</td>
-                                                    <td class="text-right">$119,366.96</td>
+                                                    <td>{{ $item->jenis_sampah }}</td>
+                                                    <td class="text-right">{{ ($item->jumlah == null)?0:$item->jumlah }} kg</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Australia</td>
-                                                    <td class="text-right">$70,261.65</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>United Kingdom</td>
-                                                    <td class="text-right">$46,399.22</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Turkey</td>
-                                                    <td class="text-right">$35,364.90</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Germany</td>
-                                                    <td class="text-right">$20,366.96</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>France</td>
-                                                    <td class="text-right">$10,366.96</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Australia</td>
-                                                    <td class="text-right">$5,366.96</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Italy</td>
-                                                    <td class="text-right">$1639.32</td>
-                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -90,30 +63,11 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="au-card chart-percent-card">
-                                <div class="au-card-inner">
-                                    <h3 class="title-2 tm-b-5">char by %</h3>
-                                    <div class="row no-gutters">
-                                        <div class="col-xl-6">
-                                            <div class="chart-note-wrap">
-                                                <div class="chart-note mr-0 d-block">
-                                                    <span class="dot dot--blue"></span>
-                                                    <span>products</span>
-                                                </div>
-                                                <div class="chart-note mr-0 d-block">
-                                                    <span class="dot dot--red"></span>
-                                                    <span>services</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-6">
-                                            <div class="percent-chart">
-                                                <canvas id="percent-chart"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="card" width="100%" height="100%">
+                                <div class="card-body">
+                                  <canvas id="dataChart"></canvas>
                                 </div>
-                            </div>
+                              </div>
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-data2">
@@ -170,6 +124,41 @@
 
         $(document).ready(function(){
             var table = $('#table_id').DataTable();
+
+            var data = @JSON($jumlah);
+            var jenis = [] ;
+            var jumlah = [];
+            var warna = [];
+            data.forEach(element => {
+                jenis.push(element.jenis_sampah);
+                jumlah.push(element.jumlah); 
+                warna.push(randomRGB());
+                console.log(randomRGB()); 
+            });
+            
+            var ctx = document.getElementById('dataChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: jenis,
+                    datasets: [{
+                        label: jenis,
+                        data: jumlah,
+                        backgroundColor: warna
+                    }],
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true
+                    }
+                }
+            });
+
+            function randomRGB(){
+                var red =  Math.floor(Math.random() * 256);
+                var green =  Math.floor(Math.random() * 256);
+                var blue =  Math.floor(Math.random() * 256);
+                return `rgb(${red},${green},${blue})`;
+            }
         });
     </script>
 @endsection

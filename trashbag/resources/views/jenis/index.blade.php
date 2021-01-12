@@ -45,14 +45,6 @@
                     <h3 class="title-5 m-b-35">Data Jenis Sampah</h3>
                     <div class="table-data__tool">
                         <div class="table-data__tool-left">
-                            <div class="rs-select2--light rs-select2--lg">
-                                <div class="input-group mb-3">
-                                    <input type="text" id="cari" class="form-control" placeholder="Search.." aria-label="Recipient's username" aria-describedby="button-addon2">
-                                    <div class="input-group-append">
-                                      <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="tableFilterCari()">Button</button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <div class="table-data__tool-right">
                             <button type="button" class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#modalInput">
