@@ -22,6 +22,8 @@ class Controller extends BaseController
         ]);
     }
 
+    //a
+
     public function imageUpload($data){
 
         $client = new Client();
