@@ -57,7 +57,7 @@
                             </div>
                             <h4 class="name">{{ Auth::user()->nama_lengkap }}</h4>
                         </a>
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+                    <a href="" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                     </form>
@@ -69,15 +69,15 @@
                                 <i class="fas fa-tachometer-alt"></i>Dashboard
                             </a>
                         </li>
+                        <li class="{{ ($menu == 'nasabah')?'active has-sub':'' }}">
+                            <a class="js-arrow" href="{{ url('/nasabah') }}">
+                                <i class="fas fa-users"></i>Nasabah
+                            </a>
+                        </li>
                         @if (Auth::user()->role == 5)
                         <li class="{{ ($menu == 'pengurus')?'active has-sub':'' }}">
                             <a class="js-arrow" href="{{ url('/pengurus') }}">
                                 <i class="fas fa-user-tie"></i>Pengurus
-                            </a>
-                        </li>
-                        <li class="{{ ($menu == 'nasabah')?'active has-sub':'' }}">
-                            <a class="js-arrow" href="{{ url('/nasabah') }}">
-                                <i class="fas fa-users"></i>Nasabah
                             </a>
                         </li>
                         <li class="{{ ($menu == 'jenis')?'active has-sub':'' }}">
@@ -130,7 +130,7 @@
                                                 <i class="zmdi zmdi-account"></i>Account</a>
                                         </div>
                                         <div class="account-dropdown__item">
-                                            <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                                            <a href="" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i>Logout</a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf
                                             </form>
@@ -167,14 +167,15 @@
                                     <i class="fas fa-tachometer-alt"></i>Dashboard
                                 </a>
                             </li>
-                            <li class="{{ ($menu == 'pengurus')?'active has-sub':'' }}">
-                                <a href="{{ url('/pengurus') }}">
-                                    <i class="fas fa-user-tie"></i>Pengurus
-                                </a>
-                            </li>
                             <li class="{{ ($menu == 'nasabah')?'active has-sub':'' }}">
                                 <a href="{{ url('/nasabah') }}">
                                     <i class="fas fa-users"></i>Nasabah
+                                </a>
+                            </li>
+                            @if (Auth::user()->role == 5)    
+                            <li class="{{ ($menu == 'pengurus')?'active has-sub':'' }}">
+                                <a href="{{ url('/pengurus') }}">
+                                    <i class="fas fa-user-tie"></i>Pengurus
                                 </a>
                             </li>
                             <li class="{{ ($menu == 'jenis')?'active has-sub':'' }}">
@@ -182,6 +183,7 @@
                                     <i class="fas fa-leaf"></i>Jenis Sampah
                                 </a>
                             </li>
+                            @endif
                             <li class="{{ ($menu == 'setoran')?'active has-sub':'' }}">
                                 <a href="{{ url('/setoran') }}">
                                     <i class="fas fa-leaf"></i>Setoran

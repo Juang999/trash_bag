@@ -46,10 +46,13 @@
                     <div class="table-data__tool">
                         <div class="table-data__tool-left">
                         </div>
+                        @if (Auth::user()->role == 5)
+                            
                         <div class="table-data__tool-right">
                             <a href="{{ url('nasabah/create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small">
                                 <i class="zmdi zmdi-plus"></i>add user</a>
                         </div>
+                        @endif
                     </div>
                     <div class="table-responsive table-responsive-data2">
                         <table class="table table-data2 display" id="table_id">
@@ -80,15 +83,22 @@
                                         <td>{{ $item->no_telepon }}</td>
                                         <td>
                                             <div class="table-data-feature">
+                                                @if (Auth::user()->role == 4)
+                                                    <a href="{{ url('nasabah/buku/'.$item->id) }}" class="item" data-toggle="tooltip" data-placement="top" title="Buku Tabungan">
+                                                        <i class="fas fa-credit-card"></i>
+                                                    </a>
+                                                @endif
                                                 <a href="{{ url('nasabah/'.$item->id) }}" class="item" data-toggle="tooltip" data-placement="top" title="Detail">
                                                     <i class="zmdi zmdi-info"></i>
                                                 </a>
+                                                @if (Auth::user()->role == 5)
                                                 <a href="{{ url('nasabah/'.$item->id.'/edit') }}" class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </a>
                                                 <a href="{{ url('nasabah/delete/'.$item->id) }}" class="item" data-toggle="tooltip" data-placement="top" title="Delete" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                                     <i class="zmdi zmdi-delete"></i>
                                                 </a>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>

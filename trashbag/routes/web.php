@@ -21,6 +21,11 @@ Route::group(['middleware' => ['auth','role:5,4']], function () {
     
     Route::get('/', 'HomeController@index')->name('home');
 
+    Route::get('nasabah', 'NasabahController@index');
+    Route::get('nasabah/{id}', 'NasabahController@show');
+    Route::get('nasabah/buku/{id}', 'NasabahController@bukuTabungan');
+    Route::post('nasabah/penarikan/{id}', 'NasabahController@penarikan');
+    
     Route::get('setoran', 'SetoranController@index');
     Route::get('penjualan', 'PenjualanController@index');
     Route::get('keuangan', 'KeuanganController@index');
@@ -31,13 +36,15 @@ Route::group(['middleware' => ['auth', 'role:5']], function () {
     Route::get('user/{id}', 'UserController@getUbah');
     Route::put('user/editFoto/{id}', 'UserController@editFoto');
     Route::put('user/resetPass/{id}', 'UserController@resetPassword');
-    Route::resource('user', 'UserController');
 
     Route::get('pengurus/delete/{id}', 'PengurusController@destroy');
     Route::resource('pengurus', 'PengurusController');
 
     Route::get('nasabah/delete/{id}', 'NasabahController@destroy');
-    Route::resource('nasabah', 'NasabahController');
+    Route::post('nasabah', 'NasabahController@store');
+    Route::get('nasabah/create', 'NasabahController@create');
+    Route::put('nasabah/{id}', 'NasabahConroller@update');
+    Route::get('nasabah/{id}/edit', 'NasabahController@edit');
 
     Route::get('jenis/getEdit/{id}', 'JenisSampahController@getEdit');
     Route::get('jenis/delete/{id}','JenisSampahController@destroy');
