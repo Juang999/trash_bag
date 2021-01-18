@@ -35,8 +35,7 @@ class PenjualanControllerAPI extends Controller
         $saldo = $saldo1->saldo + $debit;
 
         $penjualan->pj = $pj;
-        $penjualan->jenis_id = $request->jenis;
-        $penjualan->keterangan = $request->keterangan;
+        $penjualan->jenis_id = $request->jenis; 
         $penjualan->berat = $request->berat;
         $penjualan->debit = $debit;
 

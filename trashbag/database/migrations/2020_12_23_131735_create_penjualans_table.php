@@ -17,7 +17,6 @@ class CreatePenjualansTable extends Migration
             $table->id();
             $table->foreignId('pj')->constrained('users');
             $table->foreignId('jenis_id')->constrained('jenissampah');
-            $table->tinyInteger('keterangan');
             $table->double('berat');
             $table->integer('debit');
             $table->timestamps();
