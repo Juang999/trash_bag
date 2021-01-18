@@ -32,18 +32,21 @@ class PenjualanControllerAPI extends Controller
 
         $saldo1 = Keuangan::latest()->first();
 
-        // if (!$saldo1) {
-        //     $baru = Penjualan:: 
-        // }
-
-        $saldo = $saldo1->saldo + $debit;
-
+        
         $penjualan->pj = $pj;
         $penjualan->jenis_id = $request->jenis; 
         $penjualan->berat = $request->berat;
         $penjualan->debit = $debit;
-
+        
         $keuangan->debit = $debit;
+
+        if (!$saldo1->saldo) {
+            $keuangan->saldo = $debit;
+
+            $keuangan->save();
+        }
+
+        $saldo = $saldo1->saldo + $debit;
         $keuangan->saldo = $saldo;
 
         try {
