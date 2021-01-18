@@ -32,6 +32,10 @@ class PenjualanControllerAPI extends Controller
 
         $saldo1 = Keuangan::latest()->first();
 
+        // if (!$saldo1) {
+        //     $baru = Penjualan:: 
+        // }
+
         $saldo = $saldo1->saldo + $debit;
 
         $penjualan->pj = $pj;
@@ -39,7 +43,6 @@ class PenjualanControllerAPI extends Controller
         $penjualan->berat = $request->berat;
         $penjualan->debit = $debit;
 
-        $keuangan->keterangan = $request->keterangan;
         $keuangan->debit = $debit;
         $keuangan->saldo = $saldo;
 
