@@ -41,8 +41,9 @@ class SetoranControllerAPI extends Controller
         $saldo = $saldoS->saldo + $debit;
 
         $BukuTabungan->user_id = $request->id;
+        $BukuTabungan->jenis_id = $request->jenis_sampah;
         $BukuTabungan->keterangan = $request->keterangan;
-        $BukuTabungan->jenis_id = $request->jenis;
+        $BukuTabungan->berat = $request->berat;
         $BukuTabungan->debit = $debit;
         $BukuTabungan->saldo = $saldo;
 
@@ -141,6 +142,7 @@ class SetoranControllerAPI extends Controller
         $BukuTabungan->user_id = $setoran->user_id;
         $BukuTabungan->jenis_id = $setoran->jenis_id;
         $BukuTabungan->keterangan = $setoran->keterangan;
+        $BukuTabungan->berat = $request->berat;
         $BukuTabungan->debit = $debit;
         $BukuTabungan->saldo = $saldo;
 
