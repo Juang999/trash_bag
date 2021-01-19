@@ -15,8 +15,8 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             [
             'nama_lengkap' => 'Juang666',
-            'email' => 'zen0@yahoo.com',
-            'password' => Hash::make('12345678'),
+            'email' => 'Juang666@gmail.com',
+            'password' => Hash::make('Juang666'),
             'no_telepon'=> '087871504747',
             'alamat'=>'pondok programmer', 
             'foto_profil' => 'https://via.placeholder.com/150',
@@ -61,6 +61,14 @@ class UserSeeder extends Seeder
             'alamat'=>'pondok programmer', 
             'foto_profil' => 'https://via.placeholder.com/150',
             'role'=> '3'
+            ],[
+            'nama_lengkap' => 'zen',
+            'email' => 'zen0@yahoo.com',
+            'password' => Hash::make('1234567890'),
+            'no_telepon'=> '0874788587667',
+            'alamat'=>'pondok programmer', 
+            'foto_profil' => 'https://via.placeholder.com/150',
+            'role'=> '1'
             ]
         ]);
     }
