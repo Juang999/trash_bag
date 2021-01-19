@@ -13,7 +13,7 @@ class TabunganControllerAPI extends Controller
     {
         $user_id = Auth::user()->id;
 
-        $history = BukuTabungan::where('user_id', $user_id)->with('Jenis')->get();
+        $history = BukuTabungan::where('user_id', $user_id)->where('jenis_id', '!=', NULL)->with('Jenis')->get();
 
         if (!$history) {
             return $this->sendResponse('gagal', 'history nasabah tidak ada', NULL, 500);
