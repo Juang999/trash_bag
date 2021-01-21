@@ -38,6 +38,14 @@ class MessageController extends Controller
 
     public function sendMessage(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'message' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendResponse('gagal', 'pesan gagal divalidasi', $validator->errors(), 500);
+        }
+
         $from = Auth::id();
         $to = $id;
         $messages = $request->message;
