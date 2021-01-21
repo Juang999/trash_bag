@@ -15,7 +15,7 @@ class MessageController extends Controller
     {
         $my_id = Auth::id();
         // dd($my_id);
-        $getAllmessage = User::where('id', '!=',$my_id)->where('role', '!=', 3)->where('role', '!=', 4)->where('role', '!=', 5)->get();
+        $getAllmessage = User::where('id', '!=',$my_id)->where('role', '!=', 2)->where('role', '!=', 3)->where('role', '!=', 4)->where('role', '!=', 5)->get();
 
         if (!$getAllmessage) {
             return $this->sendResponse('gagal', 'pesan tidak ada untuk anda', NULL, 500);
