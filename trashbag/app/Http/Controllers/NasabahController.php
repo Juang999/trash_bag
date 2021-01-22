@@ -22,6 +22,12 @@ class NasabahController extends Controller
         return view('nasabah.detail', ['menu'=>'nasabah', 'nasabah'=>$nasabah]);
     }
 
+    public function bukuTabungan($id){
+        $buku = BukuTabungan::where('user_id', $id)->with('jenis')->get();
+        $saldo = BukuTabungan::select('user_id', 'saldo')->where('user_id', $id)->latest()->first();
+        return view('nasabah.buku', ['menu'=> 'nasabah', 'buku'=>$buku, 'saldo'=>$saldo]);
+    }
+
 
     public function create(){
         return view('nasabah.create', ['menu'=>'nasabah']);
@@ -111,6 +117,27 @@ class NasabahController extends Controller
 
         return redirect('nasabah')->with('status', 'Data berhasil diubah');
 
+    }
+
+    public function penarikan(Request $request, $id){
+        $saldo = BukuTabungan::select('saldo')->where('user_id', $id)->latest()->first();
+        $validator = Validator::make($request->all(),[
+            'nominal' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return redirect('nasabah/buku/'.$id)->with('status', $validator->errors()->first());
+        }elseif ($request->nominal > $saldo->saldo) {
+            return redirect('nasabah/buku/'.$id)->with('status', 'Nilai Nominal tidak boleh lebih besar dari saldo');
+        }
+
+        BukuTabungan::create([
+            'user_id'=> $id,
+            'kredit' => $request->nominal,
+            'saldo' => $saldo->saldo - $request->nominal
+        ]);
+
+        return redirect('nasabah/buku/'.$id)->with('status', 'Berhasil melakukan penarikan');
     }
 
 
