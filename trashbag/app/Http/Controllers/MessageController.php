@@ -6,6 +6,7 @@ use App\User;
 use App\Message;
 use Pusher\Pusher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,14 +15,24 @@ class MessageController extends Controller
     public function index()
     {
         $my_id = Auth::id();
-        // dd($my_id);
-        $getAllmessage = User::where('id', '!=',$my_id)->where('role', '!=', 2)->where('role', '!=', 3)->where('role', '!=', 4)->where('role', '!=', 5)->get();
+        
+        $from = User::select('users.id', 'users.nama_lengkap', 'users.foto_profil')->distinct()
+        ->join('messages', 'users.id', '=', 'messages.to')
+        ->where('users.id', '!=', $my_id)
+        ->where('messages.from', '=', $my_id)->get()->toArray();
 
-        if (!$getAllmessage) {
-            return $this->sendResponse('gagal', 'pesan tidak ada untuk anda', NULL, 500);
-        }
+        
+        $to = User::select('users.id', 'users.nama_lengkap', 'users.foto_profil')->distinct()
+        ->join('messages', 'users.id', '=', 'messages.from')
+        ->where('users.id', '!=', $my_id)
+        ->where('messages.to', '=', $my_id)->get()->toArray();
+        
+        // dd($to);
 
-        return $this->sendResponse('berhasil', 'semua pesan berhasil diambil', $getAllmessage, 200);
+        $data = array_unique(array_merge($from, $to), SORT_REGULAR);
+        $message = array_values($data);
+
+        return $this->sendResponse('berhasil', 'semua kontak berhasil diambil', $message, 200);
     }
 
     public function getMessage($user_id)
@@ -80,5 +91,12 @@ class MessageController extends Controller
           $pusher->trigger('my-channel', 'my-event', $message);
 
           return $this->sendResponse('success', 'pesan berhasil dikirim', $message, 200);
+    }
+
+    public function take()
+    {
+        $my_id = Auth::user()->id;
+
+        
     }
 }
