@@ -43,7 +43,7 @@ Route::group(['middleware' => ['auth', 'role:5']], function () {
     Route::get('nasabah/delete/{id}', 'NasabahController@destroy');
     Route::post('nasabah', 'NasabahController@store');
     Route::get('nasabah/create', 'NasabahController@create');
-    Route::put('nasabah/{id}', 'NasabahConroller@update');
+    Route::put('nasabah/{id}', 'NasabahController@update');
     Route::get('nasabah/{id}/edit', 'NasabahController@edit');
 
     Route::get('jenis/getEdit/{id}', 'JenisSampahController@getEdit');
