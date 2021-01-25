@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\BukuTabungan;
 use App\Setoran;
 use App\User;
+use App\Keuangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -120,21 +121,30 @@ class NasabahController extends Controller
     }
 
     public function penarikan(Request $request, $id){
-        $saldo = BukuTabungan::select('saldo')->where('user_id', $id)->latest()->first();
+        $saldo_buku = BukuTabungan::select('user_id','saldo')->where('user_id', $id)->with('user')->latest()->first();
+        $saldo_bank = Keuangan::select('saldo')->latest()->first();
         $validator = Validator::make($request->all(),[
             'nominal' => 'required'
         ]);
 
         if($validator->fails()){
             return redirect('nasabah/buku/'.$id)->with('status', $validator->errors()->first());
-        }elseif ($request->nominal > $saldo->saldo) {
+        }elseif ($request->nominal > $saldo_buku->saldo) {
             return redirect('nasabah/buku/'.$id)->with('status', 'Nilai Nominal tidak boleh lebih besar dari saldo');
+        }elseif($request->nominal > $saldo_bank->saldo){
+            return redirect('nasabah/buku/'.$id)->with('status', 'Penarikan belum dapat dilakukan');
         }
 
         BukuTabungan::create([
             'user_id'=> $id,
             'kredit' => $request->nominal,
-            'saldo' => $saldo->saldo - $request->nominal
+            'saldo' => $saldo_buku->saldo - $request->nominal
+        ]);
+
+        Keuangan::create([
+            'keterangan' => 'Penarikan oleh nasabah '.$saldo_buku->user->nama_lengkap,
+            'kredit' => $request->nominal,
+            'saldo' => $saldo_bank->saldo - $request->nominal
         ]);
 
         return redirect('nasabah/buku/'.$id)->with('status', 'Berhasil melakukan penarikan');
