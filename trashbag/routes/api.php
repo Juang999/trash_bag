@@ -37,11 +37,16 @@ Route::patch('jumlahJemput/{id}', 'SetoranControllerAPI@jemputHarga')->middlewar
 Route::get('history', 'TabunganControllerAPI@index')->middleware('jwt.verify');
 Route::get('saldo', 'TabunganControllerAPI@show')->middleware('jwt.verify');
 
-// Penjualan Sampah
+// Route Pengurus 2
 Route::post('Jual', 'PenjualanControllerAPI@store')->middleware('jwt.verify');
 
 // Get Jenis Sampah
 Route::get('jenis', 'JenisSampahControllerAPI@index');
+
+//message
+Route::get('getMessangers', 'MessageController@index')->middleware('jwt.verify');
+Route::get('getMessage/{id}', 'MessageController@getMessage')->middleware('jwt.verify');
+Route::post('sendMessage/{id}', 'MessageController@sendMessage')->middleware('jwt.verify');
 
 //Resource
 Route::resource('resource', 'UserController');
