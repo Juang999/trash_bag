@@ -11,6 +11,7 @@ use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 
 
 class UserControllerAPI extends Controller
@@ -134,5 +135,21 @@ class UserControllerAPI extends Controller
         }
 
         return response()->json(compact('user'));
+    }
+
+    public function forgot(Request $request){
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email'
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        Password::sendResetLink(['email' => $request->email]);
+
+        return response()->json([
+            'message' => 'Reset link has been sent in your email'
+        ], 200);
     }
 }

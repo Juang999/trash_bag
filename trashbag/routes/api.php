@@ -51,7 +51,8 @@ Route::get('getMessage/{id}', 'MessageController@getMessage')->middleware('jwt.v
 Route::post('sendMessage/{id}', 'MessageController@sendMessage')->middleware('jwt.verify');
 
 //reset password
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+// Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+Route::post('password/email', 'UserControllerAPI@forgot');
 
 //Resource
 Route::resource('resource', 'UserController');
