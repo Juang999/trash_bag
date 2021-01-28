@@ -77,13 +77,9 @@ class SetoranControllerAPI extends Controller
 
     public function index()
     {
-        try {
             $index = Setoran::  where('pj', NULL)->with('user', 'jenis')->get();
             
             return $this->sendResponse('berhasil', 'data berhasil ditampilkan', $index, 200);
-        } catch (\Throwable $th) {
-            return $this->sendResponse('gagal', 'data gagal ditambahkan', $th->getMessage(), 500);
-        }
     }
 
     public function jemputUpdate($id)

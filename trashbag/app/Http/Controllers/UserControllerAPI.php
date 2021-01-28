@@ -89,7 +89,7 @@ class UserControllerAPI extends Controller
                     'key' => '6d207e02198a847aa98d0a2a901485a5',
                     'action' => 'upload',
                     'source' => $file,
-                    'format' => 'json'
+                    'format' => 'json',
                 ]
             ]);
             $data = $response->getBody()->getContents();

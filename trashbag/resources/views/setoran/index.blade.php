@@ -102,7 +102,7 @@
                                     <td>{{ number_format($item->jenis->harga,2,",",".") }}</td>
                                     <td>{{ number_format($item->berat,2,",",".") }}kg</td>
                                     <td>Rp {{ number_format($item->debit,2,",",".") }}</td>
-                                    <td>{{ $item->penanggungJawab->nama_lengkap }}</td>
+                                    <td></td>
                                 </tr>
                                 @endforeach
                             </tbody>
