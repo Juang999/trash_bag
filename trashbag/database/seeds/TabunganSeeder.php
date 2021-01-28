@@ -11,14 +11,14 @@ class TabunganSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('buku_tabungans')->insert([
-            [
-                'user_id' => 1
-            ],[
-                'user_id' => 2
-            ],[
-                'user_id' => 7
-            ]
-        ]);
+        // DB::table('buku_tabungans')->insert([
+        //     [
+        //         'user_id' => 1
+        //     ],[
+        //         'user_id' => 2
+        //     ],[
+        //         'user_id' => 7
+        //     ]
+        // ]);
     }
 }
