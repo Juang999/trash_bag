@@ -79,7 +79,7 @@ class SetoranControllerAPI extends Controller
     {
             $index = Setoran::  where('pj', NULL)->with('user', 'jenis')->get();
             
-            return $this->sendResponse('berhasil', 'data berhasil ditampilkan', $index, 200);
+            return $this->sendResponse('berhasil', 'data berhasil ditampilkan', $index, 200);   
     }
 
     public function jemputUpdate($id)
