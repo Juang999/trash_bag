@@ -61,9 +61,9 @@
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ date('D, j F Y',strtotime($item->created_at)) }}</td>
                                     <td>{{ $item->keterangan }}</td>
-                                    <td>{{ ($item->debit == null)?'-':$item->debit }}</td>
-                                    <td>{{ ($item->kredit == null)?'-':$item->kredit }}</td>
-                                    <td>{{ $item->saldo }}</td>
+                                    <td>Rp {{ ($item->debit == null)?'0,00':number_format($item->debit,2,",",".") }}</td>
+                                    <td>Rp {{ ($item->kredit == null)?'0,00':number_format($item->kredit,2,",",".") }}</td>
+                                    <td>Rp {{ number_format($item->saldo,2,",",".") }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

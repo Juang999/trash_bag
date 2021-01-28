@@ -49,7 +49,7 @@
                         @if (Auth::user()->role == 5)
                             
                         <div class="table-data__tool-right">
-                            <a href="{{ url('nasabah/create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small">
+                            <a href="{{ route('nasabah.create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small">
                                 <i class="zmdi zmdi-plus"></i>add user</a>
                         </div>
                         @endif

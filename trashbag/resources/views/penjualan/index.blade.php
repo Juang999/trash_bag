@@ -49,17 +49,17 @@
                                 <div class="row">
                                     <div class="col-md-6 col-lg-3">
                                         <div class="statistic__item">
-                                            <h2 class="number">10,368</h2>
-                                            <span class="desc">members online</span>
+                                            <h2 class="number">{{ number_format($setoran->jumlah,2,",",".") }}Kg</h2>
+                                            <span class="desc">Jumlah Setoran</span>
                                             <div class="icon">
-                                                <i class="zmdi zmdi-account-o"></i>
+                                                <i class="fas fa-leaf" style="height: 190px; width: 190px;"></i>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="statistic__item">
-                                            <h2 class="number">388,688</h2>
-                                            <span class="desc">items sold</span>
+                                            <h2 class="number">{{ number_format($jumlah->jumlah,2,",",".") }}Kg</h2>
+                                            <span class="desc">Sampah Terjual</span>
                                             <div class="icon">
                                                 <i class="zmdi zmdi-shopping-cart"></i>
                                             </div>
@@ -67,17 +67,17 @@
                                     </div>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="statistic__item">
-                                            <h2 class="number">1,086</h2>
-                                            <span class="desc">this week</span>
+                                            <h2 class="number">{{ number_format(($setoran->jumlah - $jumlah->jumlah),2,",",".") }}Kg</h2>
+                                            <span class="desc">Sampah Tersimpan</span>
                                             <div class="icon">
-                                                <i class="zmdi zmdi-calendar-note"></i>
+                                                <i class="fas fa-box" style="height: 190px; width: 190px;"></i>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="statistic__item">
-                                            <h2 class="number">$1,060,386</h2>
-                                            <span class="desc">total earnings</span>
+                                            <h2 class="number">Rp {{ number_format($keuangan->saldo,2,",",".") }}</h2>
+                                            <span class="desc">Pendapatan</span>
                                             <div class="icon">
                                                 <i class="zmdi zmdi-money"></i>
                                             </div>
@@ -119,9 +119,9 @@
                                     <td>{{ date('D, j F Y',strtotime($item->created_at)) }}</td>
                                     <td>{{ $item->user->nama_lengkap }}</td>
                                     <td>{{ $item->jenis->jenis_sampah }}</td>
-                                    <td>{{ $item->jenis->harga }}</td>
-                                    <td>{{ $item->berat }}kg</td>
-                                    <td>{{ $item->debit }}</td>
+                                    <td>Rp {{ number_format($item->jenis->harga,2,",",".") }}</td>
+                                    <td>{{ number_format($item->berat,2,",",".") }}kg</td>
+                                    <td>Rp {{ number_format($item->debit,2,",",".") }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
