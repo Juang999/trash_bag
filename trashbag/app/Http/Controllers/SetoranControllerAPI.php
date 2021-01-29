@@ -159,9 +159,16 @@ class SetoranControllerAPI extends Controller
     {
         $my_id = Auth::user()->id;
 
-        $total = DB::table('buku_tabungans')->where('user_id', '=', $my_id)->sum('buku_tabungans.berat');
+        $awal = BukuTabungan::where('user_id', $my_id)->where('saldo', '!=', 0)->count();
 
-        // dd($total);
+        if ($awal < 2) {
+
+            $Total = BukuTabungan::where('user_id', $my_id)->latest()->first();
+
+            return $this->sendResponse('berhasil', 'total sampah berhasil diambil', $Total->berat, 200);
+        }
+
+        $total = DB::table('buku_tabungans')->where('user_id', '=', $my_id)->sum('buku_tabungans.berat');
 
         return $this->sendResponse('berhasil', 'total sampah berhasil diambil', $total, 200);
     }
