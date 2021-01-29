@@ -15,8 +15,6 @@ class BukuTabunganController extends Controller
 
         $saldo = BukuTabungan::select('saldo', 'created_at')->where('user_id', $my_id)->where('saldo', '!=', 0)->get();
 
-        // dd($saldo);
-
         return $this->sendResponse('berhasi', 'history saldo berhasil ditampilkan', $saldo, 200);
     }
 }

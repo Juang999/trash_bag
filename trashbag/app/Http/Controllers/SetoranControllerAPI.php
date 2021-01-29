@@ -172,4 +172,15 @@ class SetoranControllerAPI extends Controller
 
         return $this->sendResponse('berhasil', 'total sampah berhasil diambil', $total, 200);
     }
+
+    public function totalBerat()
+    {
+        $my_id = Auth::user()->id;
+
+        $total = Setoran::select('berat', 'jenis_id', 'created_at')->where('pj', $my_id)->with('jenis')->get();
+
+        // dd($total);
+
+        return $this->sendResponse('berhasil', 'history penjemputan berhasil diambil', $total, 200);
+    }
 }

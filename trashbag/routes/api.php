@@ -34,6 +34,7 @@ Route::post('Jemput', 'SetoranControllerAPI@jemput')->middleware('jwt.verify');
 Route::get('index', 'SetoranControllerAPI@index')->middleware('jwt.verify');
 Route::patch('updateJemput/{id}', 'SetoranControllerAPI@jemputUpdate')->middleware('jwt.verify');
 Route::patch('jumlahJemput/{id}', 'SetoranControllerAPI@jemputHarga')->middleware('jwt.verify');
+Route::get('historyBeratSampah', 'SetoranControllerAPI@totalBerat')->middleware('jwt.verify');
 
 // Buku Tabungan Nasabah
 Route::get('history', 'TabunganControllerAPI@index')->middleware('jwt.verify');
