@@ -7,6 +7,7 @@ use App\Setoran;
 use App\JenisSampah;
 use App\BukuTabungan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -152,5 +153,16 @@ class SetoranControllerAPI extends Controller
         } catch (\Throwable $th) {
             return $this->sendResponse('gagal', 'penjemputan gagal', NULL, 404);
         }
+    }
+
+    public function total()
+    {
+        $my_id = Auth::user()->id;
+
+        $total = DB::table('buku_tabungans')->where('user_id', '=', $my_id)->sum('buku_tabungans.berat');
+
+        // dd($total);
+
+        return $this->sendResponse('berhasil', 'total sampah berhasil diambil', $total, 200);
     }
 }
