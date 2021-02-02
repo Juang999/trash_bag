@@ -18,10 +18,6 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::group(['middleware' => ['auth', 'role:5']], function () {
-    Route::get('user/profile', 'UserController@profile');
-    Route::get('user/{id}', 'UserController@getUbah');
-    Route::put('user/editFoto/{id}', 'UserController@editFoto');
-    Route::put('user/resetPass/{id}', 'UserController@resetPassword');
 
     Route::get('pengurus/delete/{id}', 'PengurusController@destroy');
     Route::resource('pengurus', 'PengurusController');
@@ -40,6 +36,12 @@ Route::group(['middleware' => ['auth', 'role:5']], function () {
 Route::group(['middleware' => ['auth','role:5,4']], function () {
     
     Route::get('/', 'HomeController@index')->name('home');
+
+    Route::get('user/profile', 'UserController@profile');
+    Route::get('user/{id}', 'UserController@getUbah');
+    Route::put('user/{id}', 'UserController@update');
+    Route::put('user/editFoto/{id}', 'UserController@editFoto');
+    Route::put('user/resetPass/{id}', 'UserController@resetPassword');
 
     Route::get('nasabah', 'NasabahController@index');
     Route::get('nasabah/{id}', 'NasabahController@show');
