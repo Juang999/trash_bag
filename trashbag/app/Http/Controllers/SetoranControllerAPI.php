@@ -181,6 +181,6 @@ class SetoranControllerAPI extends Controller
 
         // dd($total);
 
-        return $this->sendResponse('berhasil', 'history penjemputan berhasil diambil', $total, 200);
+        return $this->sendResponse('berhasil', 'history penjemputan berhasil diambil', $total, 200); 
     }
 }
